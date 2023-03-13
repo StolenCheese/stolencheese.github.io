@@ -3,10 +3,38 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>MyBlog</title>
+	<title>Maxwell's Website</title>
+	<link rel="stylesheet" href="/main.css">
 </head>
 
 <body>
+
+	{%if page.ancestors%}
+	{%set item = page%}
+	{%elif section.ancestors%}
+	{%set item = section%}
+	{%endif%}
+
+	{%if item%}
+
+	{%for a in item.ancestors%}
+
+	{%set s = get_section(path=a)%}
+
+	<a href="{{ s.permalink}}">{{s.title}}</a>
+
+	/
+
+	{%endfor%}
+
+	{{item.title}}
+
+	{%else%}
+
+	<a href="/">Home</a>
+
+	{%endif%}
+
 	<section class="section">
 		<div class="container">
 			{% block content %} {% endblock %}

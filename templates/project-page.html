@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% set section = get_section(path="projects/_index.md") %}
+
+
+
+<h1 class="title">
+	{{ page.title }}
+</h1>
+
+<p class="subtitle"><strong>{{page.date}}</strong>{% if page.extra["repo"] %}, <a href={{ page.extra["repo"] }}>Repo</a>{%endif%}{% if page.extra["site"] %}, <a href={{ page.extra["site"] }}>Site</a>{%endif%}</p>
+
+{{ page.content | safe }}
+{% endblock content %}

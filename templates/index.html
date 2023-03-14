@@ -5,4 +5,39 @@
 	Maxwell's Website
 </h1>
 <p>Click <a href="{{ get_url(path='@/projects/_index.md') }}">here</a> to see my projects, and <a href="{{ get_url(path='@/thoughts/_index.md') }}">here</a> to read my thoughts.</p>
+
+<!-- {% for page in section.subsections %}
+
+{% set section = get_section(path=page, metadata_only=true) %}
+
+<button class="listButton" onclick="window.location.href='{{ section.permalink | safe }}';">
+	<b> {{ section.title }} </b>
+
+
+</button>
+
+{% endfor %} -->
+
+<h2>Highlights:</h2>
+<div class="listContainer">
+	{% for page in ["projects/ch-concentrated-solar.md"] %}
+
+	{% set page = get_page(path=page, metadata_only=true) %}
+
+	<button class="listButton" onclick="window.location.href='{{ page.permalink | safe }}';">
+		<b> {{ page.title }} </b>
+
+		{{ page.summary | safe }}
+
+		{%if page.extra["img"]%}
+		{%set src = page.extra["img"]%}
+		<img class="previewImage" src="{{ src }}" />
+
+		{%endif%}
+	</button>
+
+	{% endfor %}
+
+</div>
+
 {% endblock content %}

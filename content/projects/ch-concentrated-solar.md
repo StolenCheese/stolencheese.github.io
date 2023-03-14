@@ -4,6 +4,7 @@ date = 2022-12-13
 [extra]
 repo = "https://github.com/StolenCheese/ch-concentrated-solar"
 site = "https://mods.factorio.com/mod/ch-concentrated-solar"
+img = "/projects/banner2.png"
 +++
 
 A Factorio mod I made over the christmas holiday, currently sitting at 809 downloads (!).

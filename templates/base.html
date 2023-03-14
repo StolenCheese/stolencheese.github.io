@@ -16,7 +16,7 @@
 	{%set item = section%}
 	{%endif%}
 
-	<div>
+	<div class="topBar">
 		{%if item%}
 
 		{%for a in item.ancestors%}
@@ -39,8 +39,8 @@
 	</div>
 
 
-	<section class="section">
-		<div class="container">
+	<section class="content">
+		<div>
 			{% block content %} {% endblock %}
 		</div>
 	</section>

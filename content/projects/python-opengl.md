@@ -1,6 +1,8 @@
 +++
 title = "Python OpenGL"
 date = 2019-12-27
+[extra]
+img= "/projects/python-opengl/demo2.png"
 +++
 
 An incredibly cursed python project to render 3D graphics through a TKinter frame.

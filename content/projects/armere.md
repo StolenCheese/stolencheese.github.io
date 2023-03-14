@@ -1,7 +1,9 @@
 +++
 title = "Armere"
 date = 2020-05-21
+[extra]
 repo = "https://github.com/StolenCheese/Armere"
+img="/projects/armere/grass.png"
 +++
 
 

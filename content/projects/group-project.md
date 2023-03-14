@@ -1,6 +1,6 @@
 +++
-title = "CS:IB Group Project"
-date = 2023-03-07
+title = "CS:IB Group Project : ModularSynth"
+date = 2023-03-14
 +++
 
 <!-- more -->
@@ -11,7 +11,7 @@ My overall experience with the project was positive; all members of the team mos
 
 In terms of code, the largest issues with the (my region, backend of) project was the lack of unit tests on higher levels of the code - all tests where implementation tests, meaning testing higher level units in isolation was impossible and proved not useful to debug, although very useful to verify the entire project was working. The solution to this would have been to make a dummy library to take the place of lower level ones and substituting out objects for dummies, then testing the state of those instead of the root supercollider servers.
 
-## Person Contribution
+## Personal Contribution
 
 My first work was experimenting with control of a supercollider server in python, which taught me a lot about the workings of the server and gave us early knowledge about the capabilities and limitations of the server. This prototype was based around a simple command line control, with no UI, and gave us the first set of synthdefs (audio functions), and midi playback, although these were both to be heavily improved.
 

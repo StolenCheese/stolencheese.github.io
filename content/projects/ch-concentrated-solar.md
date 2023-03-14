@@ -7,7 +7,7 @@ site = "https://mods.factorio.com/mod/ch-concentrated-solar"
 +++
 
 A Factorio mod I made over the christmas holiday, currently sitting at 809 downloads (!).
-
+<!-- more -->
 I'm quite happy with the power output as it stands at the default though, it was always intended as an improvement to solar rather then a nuclear power competitor, and if it were to take up the exact space as nuclear while still being about to work 24/7, as well as how energy dense steam storage can be, I think it would quickly become very unbalanced (see the other existing concentrated solar mod).
 
 The reason solar intensity was set at 600 however was to limit the range on heat pipes, to incentivise close heat exchangers pumping steam to turbines further away, as a bit of a spacing puzzle.

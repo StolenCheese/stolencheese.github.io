@@ -3,6 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Maxwell's Website</title>
 	<link rel="stylesheet" href="/main.css">
 </head>
@@ -15,25 +16,28 @@
 	{%set item = section%}
 	{%endif%}
 
-	{%if item%}
+	<div>
+		{%if item%}
 
-	{%for a in item.ancestors%}
+		{%for a in item.ancestors%}
 
-	{%set s = get_section(path=a)%}
+		{%set s = get_section(path=a)%}
 
-	<a href="{{ s.permalink}}">{{s.title}}</a>
+		<a href="{{ s.permalink}}">{{s.title}}</a>
 
-	/
+		/
 
-	{%endfor%}
+		{%endfor%}
 
-	{{item.title}}
+		{{item.title}}
 
-	{%else%}
+		{%else%}
 
-	<a href="/">Home</a>
+		<a href="/">Home</a>
 
-	{%endif%}
+		{%endif%}
+	</div>
+
 
 	<section class="section">
 		<div class="container">

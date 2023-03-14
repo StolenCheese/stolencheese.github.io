@@ -5,7 +5,7 @@ repo = "https://github.com/StolenCheese/Armere"
 +++
 
 
-All of my hobby projects up until 2022 in one big bundle. This was my main indroduction to large codebase, and to this day I think it
+All of my hobby projects up until 2022 in one big bundle. <!-- more --> This was my main indroduction to large codebase, and to this day I think it
 went pretty well all things considered, and certainly taught me a huge amount about organisation, making code that I can actually read,
 got me to start using vscode, and how to use git (or at least the github desktop app).
 

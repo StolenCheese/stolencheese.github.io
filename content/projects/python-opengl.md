@@ -4,7 +4,7 @@ date = 2019-12-27
 +++
 
 An incredibly cursed python project to render 3D graphics through a TKinter frame.
-
+<!-- more -->
 ## Results
 
 Instanced rendering allowed for each mesh to be drawn in multiple positions with minimal performance impact. This was very important, because draw calls from _python_ were not the most efficient.

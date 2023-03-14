@@ -4,9 +4,12 @@ date = 2023-02-15
 site = "https://stolencheese.itch.io/rhythm-mythril-fever"
 +++
 
-## Rhythm Mythril Fever
+
 
 I really enjoyed working on this, as I got to chill out in a room with friends for a weekend making a game that was mostly focused on art.
+<!-- more -->
+
+## Rhythm Mythril Fever
 
 ![Stage 1](/projects/camgamjam/demo1.png)
 

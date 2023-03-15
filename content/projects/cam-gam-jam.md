@@ -1,8 +1,8 @@
 +++
-title = "Cam Gam Jam"
+title = "Cam Game Jam: Rhythm Mythril Fever"
 date = 2023-02-15
 [taxonomies]
-tags=["games", "godot"]
+tags=["games", "godot", "blender"]
 [extra]
 site = "https://stolencheese.itch.io/rhythm-mythril-fever"
 img = "/projects/camgamjam/demo3.png"
@@ -28,3 +28,9 @@ I worked on a decent amount of the 3D models myself, but realized 10 hours in th
 ![Stage 3](/projects/camgamjam/demo3.png)
 
 I would love to upload the models to the website but I simply don't know how.
+
+---
+
+Also included, this neat trophy!
+
+![Trophy](/projects/camgamjam/trophy.png)

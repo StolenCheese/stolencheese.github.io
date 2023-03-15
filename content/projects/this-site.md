@@ -18,3 +18,10 @@ Or this quote
 {% quote(author="Maxwell")%}
 I think this is pretty neat
 {% end %}
+
+Or this gallery of images:
+
+{{gallery(
+	images = ["/renders/enceladus-3.png", "/renders/enceladus-wide.png", "/projects/armere/grass.png", "/projects/camgamjam/trophy.png", "/renders/trangeir.png"],
+	alts = ["Winter holidays by shuttle to Enceladus", "Spaceport overview", "Grass", "Trophy", "Trangeir"])
+}}

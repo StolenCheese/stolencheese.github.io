@@ -37,7 +37,7 @@ I am most familiar with the contributions of 1. █████ █████ 
 
 ### 1. █████ █████
 
-█████ █████ worked mainly on the graph network for the supercollider model, ensuring cyclic connections and a single input to each
+█████ worked mainly on the graph network for the supercollider model, ensuring cyclic connections and a single input to each
 "wire group" was maintained throughout the running of the program. This included making some of the higher level classes exposed to
 front-end, including `Section.cpp`, which had many utility functions for connecting ports and diagnosing the issues with connections
 should they occur so the front-end could tell the user what had gone wrong, useful as part of the goal of the project was to introduce
@@ -48,26 +48,26 @@ the backend, and developed integration tests for the entire library.
 
 ### 2. █████ █████
 
-█████ █████ worked heavily on the front-end, developing an entity management system to be integrated with the 2D rendering framework Monogame,
+█████ worked heavily on the front-end, developing an entity management system to be integrated with the 2D rendering framework Monogame,
 which was then used by them to develop a grid system to drag and drop modules around on and component rendering system to draw and track
 positions of knobs and dials and the like of synthesiser modules.
 
 ### 3. █████ █████
 
-█████ █████ worked on a huge variety of tasks, starting with attempting to design a c-style dll compatibility layer, which was ultimately replaced,
+█████ worked on a huge variety of tasks, starting with attempting to design a c-style dll compatibility layer, which was ultimately replaced,
 to working on a large amount of UI design for components, developing the graphics for dangling wires and most other intractable UI components.
 Along with this, they used blender to develop high quality and easily readable graphics for different modules, excepting the midi
 and organ graphics which were made by me, and overall contributed heavily to the polished look and feel of the final product.
 
 ### 4. █████ █████
 
-█████ █████ Worked on the higher level of Supercollider, using my SCOOP library to design `LogicalBus.cpp` which allowed the merging and
+█████ worked on the higher level of Supercollider, using my SCOOP library to design `LogicalBus.cpp` which allowed the merging and
 separating of groups of synths reading and writing to the same parameters, allowing the node based representation above it to easily
 set synths to read and write to each other. They also helped me with a large amount of debugging and editing to the SCOOP layer.
 
 ### 5. █████ █████
 
-█████ █████ worked on the json representation of modules for the instantiation of their set of UI components and graphics. This worked
+█████ worked on the json representation of modules for the instantiation of their set of UI components and graphics. This worked
 with a two file system, one file defining what parameters a synthdef contained and their limits, and another file defining how these
 parameters would be represented with components on a module. This allowed for multiple modules referring to the same synthdef,
 useful for when different synthdefs could produce a large variety of sounds, for example the `sin-ar` synthdef which could be

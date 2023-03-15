@@ -90,6 +90,46 @@ button:hover {
 	background-color: var(--bg-grey);
 }
 
+
+.gallery {
+	width: 100%;
+}
+
+.gallery img {
+	max-height: 500px;
+}
+
+.gallery-slider {
+	background-color: var(--bg-grey);
+	padding: 5px;
+	display: flex;
+	overflow-x: scroll;
+
+	align-items: center;
+	height: 200px;
+}
+
+.gallery-slider img {
+	flex-shrink: 0;
+	flex-grow: 0;
+	margin: 5px;
+	align-self: top;
+
+	width: auto;
+	height: auto;
+	max-height: 180px;
+	max-width: 300px;
+	cursor: pointer;
+}
+
+.gallery-frame {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 500px;
+}
+
+
 @media (max-width: 500px) {
 	.list-container {
 		columns: 1;

@@ -2,7 +2,7 @@
 title = "Factorio Mod: Concentrated Solar Power"
 date = 2022-12-13
 [taxonomies]
-tags=["games", "lua"]
+tags=["games", "lua", "blender"]
 [extra]
 repo = "https://github.com/StolenCheese/ch-concentrated-solar"
 site = "https://mods.factorio.com/mod/ch-concentrated-solar"

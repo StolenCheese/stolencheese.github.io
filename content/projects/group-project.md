@@ -1,6 +1,8 @@
 +++
 title = "CS:IB Group Project : ModularSynth"
 date = 2023-03-14
+[taxonomies]
+tags=["cpp", "cs"]
 +++
 
 <!-- more -->

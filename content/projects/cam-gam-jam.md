@@ -1,6 +1,8 @@
 +++
 title = "Cam Gam Jam"
 date = 2023-02-15
+[taxonomies]
+tags=["games", "godot"]
 [extra]
 site = "https://stolencheese.itch.io/rhythm-mythril-fever"
 img = "/projects/camgamjam/demo3.png"

@@ -1,6 +1,8 @@
 +++
 title = "Python OpenGL"
 date = 2019-12-27
+[taxonomies]
+tags=["python", "opengl"]
 [extra]
 img= "/projects/python-opengl/demo2.png"
 +++

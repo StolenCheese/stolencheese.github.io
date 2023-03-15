@@ -12,3 +12,9 @@ It's hosted on github pages, as seen by the `.github.io` in the url, which is on
 I can insert shortcodes in the markdown to embed custom html, for example this banner:
 
 {{banner(src="/thoughts/here.png")}}
+
+Or this quote
+
+{% quote(author="Maxwell")%}
+I think this is pretty neat
+{% end %}

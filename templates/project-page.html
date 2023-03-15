@@ -2,15 +2,29 @@
 
 {% block content %}
 
-{% set section = get_section(path="projects/_index.md") %}
-
 
 
 <h1 class="title">
 	{{ page.title }}
 </h1>
 
-<p class="subtitle"><strong>{{page.date}}</strong>{% if page.extra["repo"] %}, <a href={{ page.extra["repo"] }}>Repo</a>{%endif%}{% if page.extra["site"] %}, <a href={{ page.extra["site"] }}>Site</a>{%endif%}</p>
+
+<code>
+	{"date" : {{page.date}}, "tags" : [
+		{%-if page.taxonomies.tags-%} 
+		{%-for tag in page.taxonomies.tags-%}
+		"<a href={{ get_taxonomy_url(kind="tags", name=tag) }}>{{tag}}</a>",
+		{%-endfor-%}
+		{%-endif-%}] 
+	}
+	{%- if page.extra["repo"] -%}, "repo":"<a href={{ page.extra["repo"] }}>...</a>"{%-endif-%}
+	{%- if page.extra["site"] -%}, "site":"<a href={{ page.extra["site"] }}>...</a>"{%-endif-%}
+}
+
+</code>
+
+
+</p>
 
 {{ page.content | safe }}
 {% endblock content %}

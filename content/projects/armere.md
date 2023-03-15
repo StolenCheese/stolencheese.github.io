@@ -1,14 +1,16 @@
 +++
 title = "Armere"
 date = 2020-05-21
+[taxonomies]
+tags=["games", "cs"]
 [extra]
 repo = "https://github.com/StolenCheese/Armere"
 img="/projects/armere/grass.png"
 +++
 
 
-All of my hobby projects up until 2022 in one big bundle. <!-- more --> This was my main indroduction to large codebase, and to this day I think it
-went pretty well all things considered, and certainly taught me a huge amount about organisation, making code that I can actually read,
+All of my hobby projects up until 2022 in one big bundle. <!-- more --> This was my main introduction to large codebases, to this day I think it
+went pretty well all things considered, and it certainly taught me a huge amount about organisation, making code that I can actually read,
 got me to start using vscode, and how to use git (or at least the github desktop app).
 
 Communications between different projects (mechanics) are structured through event driven dependency injection,

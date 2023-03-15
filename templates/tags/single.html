@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h2>tag: {{ term.name }}</h2>
+<a href="../">All tags</a>
+
+<div class="list-container">
+	{% for page in term.pages %}
+
+	{% include "shortcodes/page-preview.html" %}
+
+	{% endfor %}
+</div>
+{% endblock content %}

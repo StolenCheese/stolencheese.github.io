@@ -1,0 +1,14 @@
+<button class="list-button" onclick="window.location.href='{{ page.permalink | safe }}';">
+	<h3> {{ page.title }} </h3>
+
+	<p>{{ page.summary | safe }}</p>
+
+	{%if page.extra["img"]%}
+	{%set src = page.extra["img"]%}
+
+	<div class="preview-image-container">
+		<img class="preview-cmage" src="{{ src }}" />
+	</div>
+
+	{%endif%}
+</button>

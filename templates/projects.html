@@ -5,24 +5,11 @@
 	{{ section.title }}
 </h1>
 
-<div class="listContainer">
+<div class="list-container">
 	<!-- If you are using pagination, section.pages will be empty. You need to use the paginator object -->
 	{% for page in section.pages %}
 
-	<button class="listButton" onclick="window.location.href='{{ page.permalink | safe }}';">
-		<h3> {{ page.title }} </h3>
-
-		<p>{{ page.summary | safe }}</p>
-
-		{%if page.extra["img"]%}
-		{%set src = page.extra["img"]%}
-
-		<div class="previewImageContainer">
-			<img class="previewImage" src="{{ src }}" />
-		</div>
-
-		{%endif%}
-	</button>
+	{% include "shortcodes/page-preview.html" %}
 
 	<!-- 
 <a href="{{ page.permalink | safe }}"> </a> -->

@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div>
+	<p>
+		{{ terms | length }} tags in total
+	</p>
+	<p>
+		{% for tag in terms %}
+		<a class="a-button" href="{{ tag.permalink }}">
+			{{ tag.name }}
+			<span class="count">{{ tag.pages | length }}</span>
+		</a>
+		{% endfor %}
+	</p>
+</div>
+{% endblock content %}

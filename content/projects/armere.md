@@ -18,7 +18,26 @@ using Unity's scriptable objects acting as event delegates (Mechanics/Scriptable
 are connecting the enemy death event to spawning interact-able items, or connecting the player's sword swing to destroying
 blades of grass.
 
-![Waterfall](/projects/armere/waterfall.png)
+{{img(src = "/projects/armere/waterfall.png" alt = "Waterfall")}}
+
+## Grass
+
+{{img(src = "/projects/armere/grass.png" alt = "Grass")}}
+
+This grass I remember absolutely killing me when I first made it. Before the explanation, have some progress images:
+
+{{gallery(
+	images = ["/projects/armere/grass-0.png","/projects/armere/grass-1.png","/projects/armere/grass-2.png","/projects/armere/grass-3.png"]
+	alts = ["First working indirect render" ,"First working lit shader (with shadows)", "Density based distribution", "Player interaction"]
+)}}
+
+Using draw instanced indirect functionality, I have been able to (after many attempts) create a system to place blades of grass on height mapped terrain, using local terrain data such as splatmaps to inform how the grass should be created.
+
+![Grass Chunking system](/projects/armere/grass_chunks.png)
+
+A chunk system is used stored as a quad-tree to enable quick loading and unloading of grass blades, represented as blocks of GPU memory.
+
+Grass blades can also be destroyed using compute shaders, for example the destroy grass in bounds event channel will mark every blade of grass in the bounds as dead, then while rendering, a prefix parallel sum pass is performed to pack all living blades into a separate buffer for rendering.
 
 ## Gameplay
 
@@ -42,7 +61,7 @@ activities.
 ![Buoyant cylinder](/projects/armere/log_in_water.png)
 
 The buoyancy system uses the voxel approach to sample discrete cubes within a physics object for how much water they displace and
-so how much force and torque should be enacted on the object. This is done in parallel, also using Unity Burst allowing for very fast execution
+so how much force and torque should be enacted on the object. This is done in parallel, also using Unity Burst allowing for very fast execution.
 
 ### Trees
 
@@ -50,26 +69,11 @@ so how much force and torque should be enacted on the object. This is done in pa
 
 Chopping down trees creates dynamic tree meshes as the trunks have cuts marked into them and are eventually felled.
 Chops reveal the rings inside the tree by using a separate texture and material for tris created inside the trunk.
-This is also done in parallel using burst resulting in very quick performance
+This is also done in parallel using burst resulting in very quick performance.
 
-## VFX
-
-### Water
+## Water
 
 Swimming in water creates a particle effect that leaves ripples behind the player. Any items entering or exiting water create their
-own splashes and ripples
+own splashes and ripples.
 
 ![Water Trail](/projects/armere/water_trail.png)
-
-### Grass
-
-![Grass](/projects/armere/grass.png)
-
-Using draw instanced indirect functionality, I have been able to (after many attempts) create a system to place blades of grass on height mapped terrain, using local terrain data such as splatmaps to inform how the grass should be created.
-
-![Grass Chunking system](/projects/armere/grass_chunks.png)
-
-A chunk system is used stored as a quad-tree to
-enable quick loading and unloading of grass blades, represented as blocks of gpu memory.
-
- Grass blades can also be destroyed using compute shaders, for example the destroy grass in bounds event channel will mark every blade of grass in the bounds as dead, then while rendering, a prefix parallel sum pass is performed to pack all living blades into a separate buffer for rendering.

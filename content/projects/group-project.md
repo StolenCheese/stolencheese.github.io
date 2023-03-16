@@ -5,6 +5,8 @@ date = 2023-03-14
 tags=["cpp", "cs"]
 +++
 
+Winner: Best Presentation, Nominated: Best Technical Achievement.
+
 <!-- more -->
 
 ## Overall Experience

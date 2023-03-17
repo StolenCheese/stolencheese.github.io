@@ -17,7 +17,7 @@ using Unity's scriptable objects acting as event delegates (Mechanics/Scriptable
 are connecting the enemy death event to spawning interact-able items, or connecting the player's sword swing to destroying
 blades of grass.
 
-{{img(src = "/projects/armere/waterfall.png" alt = "Waterfall")}}
+![Waterfall](/projects/armere/waterfall.png)
 
 ## Grass
 

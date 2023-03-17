@@ -3,6 +3,8 @@ title = "CS:IB Group Project : ModularSynth"
 date = 2023-03-14
 [taxonomies]
 tags=["cpp", "cs"]
+[extra]
+img = "/projects/midi.png"
 +++
 
 Winner: Best Professional Achievement, Nominated: Best Technical Achievement.
@@ -20,6 +22,8 @@ Sophisticated digital music composition tools like the Sonic Pi language rely on
 My overall experience with the project was positive; all members of the team mostly agreed on all design decisions, used git with branches effectively to manage collaboration, and kept to most key timelines.
 
 In terms of code, the largest issues with the (my region, backend of) project was the lack of unit tests on higher levels of the code - all tests where implementation tests, meaning testing higher level units in isolation was impossible and proved not useful to debug, although very useful to verify the entire project was working. The solution to this would have been to make a dummy library to take the place of lower level ones and substituting out objects for dummies, then testing the state of those instead of the root supercollider servers.
+
+![MIDI Module](/projects/midi.png)
 
 ## Personal Contribution
 

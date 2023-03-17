@@ -5,6 +5,7 @@ date = 2022-01-22
 tags=["python"]
 [extra]
 site = "https://devpost.com/software/youtube-wiki-referencer" 
+img = "/projects/tomscott.jpg"
 +++
 
 24hr hackathon.

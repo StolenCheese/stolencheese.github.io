@@ -8,7 +8,6 @@ repo = "https://github.com/StolenCheese/Armere"
 img="/projects/armere/grass.png"
 +++
 
-
 All of my hobby projects up until 2022 in one big bundle. <!-- more --> This was my main introduction to large codebases, to this day I think it
 went pretty well all things considered, and it certainly taught me a huge amount about organisation, making code that I can actually read,
 got me to start using vscode, and how to use git (or at least the github desktop app).
@@ -22,7 +21,7 @@ blades of grass.
 
 ## Grass
 
-{{img(src = "/projects/armere/grass.png" alt = "Grass")}}
+![Grass](/projects/armere/grass.png)
 
 This grass I remember absolutely killing me when I first made it. Before the explanation, have some progress images:
 

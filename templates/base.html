@@ -10,6 +10,8 @@
 
 <body>
 
+	{% block header %}
+
 	{%if page.ancestors%}
 	{%set item = page%}
 	{%elif section.ancestors%}
@@ -37,7 +39,7 @@
 
 		{%endif%}
 	</div>
-
+	{% endblock %}
 
 	<section class="content">
 		<div>

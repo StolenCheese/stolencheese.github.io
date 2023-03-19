@@ -28,7 +28,7 @@ Every modded item in Factorio has to be derived from an existing "prototype", a 
 
 Towers use the `reactor` prototype definition, as the only one in the game to generate heat from a power source. The contents/burning fuel of the reactor is a custom fluid named `solar-intensity`, the the amount of power generated scaling based on its temperature, allowing the power of a tower to be scaled easily by the number of surrounding mirrors, just by setting their temperature. The main downside of this is that in Factorio 0°≠ empty, despite both producing no power, so the tower's fluid box must be explicitly drained during night/with no surrounding mirrors to display the no fuel icon.
 
-The main loop of the mod is then as such:
+[^coremain]: The main loop of the mod is then as such:
 
 ```lua
 local function on_nth_tick_tower_update(event)
@@ -108,9 +108,9 @@ With power generation working, beams where quite simple to implement; a certain 
 
 To make beams phase in over the day/night cycle, this process is repeated once every 600 ticks for all towers (incrementally, the same as the update routine above), and the hash was extended to allow a range of mirrors to produce beams, but lower hash numbers meant the beam was more prevalent throughout the day.
 
-Beams are spawned with a lifetime of 600 ticks in the `generateBeam` method, to ensure they do not pile up and eventually crash the game (which did happen before I noticed this bug).
+Beams are spawned with a lifetime of 600 ticks in the `generateBeam` method, to ensure they do not pile up and eventually crash the game[^1].
 
-The core of the loop then, minus the incremental tower logic (effectively the same as the main loop code):
+The core of the loop then, minus the incremental tower logic (effectively the same as the main loop code[^coremain]):
 
 ```lua
 -- Start spawning beams for the day
@@ -149,3 +149,7 @@ The `mid` is multiplied by the prime 29 to give some randomness to beam placemen
 {{figure(src = "/projects/ch-concentrated-solar/overlay.png" alt="Overlay" caption = "Early placement overlay")}}
 
 Turned out very easy to implement, as the game has very similar functionality for electrical systems - in the `defines.events.on_player_cursor_stack_changed` or `defines.events.on_selected_entity_changed`, check if the entity or stack in question is related to your system (in this case a tower or a mirror), and spawn bounding boxes for each important range-based entity (in this case, just towers).
+
+---
+
+[^1]: This did happen.

@@ -135,7 +135,9 @@ button:hover {
 	height: 500px;
 }
 
-
+.footnote-definition p {
+	display: inline-block;
+}
 
 @media (max-width: 500px) {
 	.list-container {

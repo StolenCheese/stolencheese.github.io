@@ -16,3 +16,5 @@ Instanced rendering allowed for each mesh to be drawn in multiple positions with
 	images = ["/projects/python-opengl/demo0.png", "/projects/python-opengl/demo1.png","/projects/python-opengl/demo2.png","/projects/python-opengl/demo3.png","/projects/python-opengl/demo4.png","/projects/python-opengl/demo5.png"]
 	alts = ["Instanced Rendering", "Skybox","Transparency Ordering","Skybox Reflection","Depth Map","Shadows"]
 	)}}
+
+## Core

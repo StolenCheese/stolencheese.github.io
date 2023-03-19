@@ -1,8 +1,10 @@
 +++
 title = "Visit Enceladus"
-date = 2023-03-15
+date = 2023-03-15 
 [taxonomies]
 tags=["blender"]
+[extra]
+img = "/renders/enceladus-wide.png" 
 +++
 
 A couple images showing the process of making this sci-fi retro travel poster:

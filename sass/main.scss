@@ -23,6 +23,8 @@ pre,
 code {
 	font-family: 'Fira Code', Consolas, monospace;
 	font-size: small;
+
+	overflow-x: scroll;
 }
 
 button {
@@ -86,10 +88,6 @@ button:hover {
 	max-height: 1000%;
 }
 
-.language-cpp {
-	overflow-x: scroll;
-}
-
 .a-button {
 	margin: 5px;
 	padding: 5px;
@@ -135,8 +133,13 @@ button:hover {
 	height: 500px;
 }
 
+.footnote-definition {
+	margin-left: 4%;
+}
+
 .footnote-definition p {
-	display: inline-block;
+	display: inline;
+	margin-bottom: 20px;
 }
 
 @media (max-width: 500px) {

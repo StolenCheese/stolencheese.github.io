@@ -28,7 +28,7 @@ Every modded item in Factorio has to be derived from an existing "prototype", a 
 
 Towers use the `reactor` prototype definition, as the only one in the game to generate heat from a power source. The contents/burning fuel of the reactor is a custom fluid named `solar-intensity`, the the amount of power generated scaling based on its temperature, allowing the power of a tower to be scaled easily by the number of surrounding mirrors, just by setting their temperature. The main downside of this is that in Factorio 0°≠ empty, despite both producing no power, so the tower's fluid box must be explicitly drained during night/with no surrounding mirrors to display the no fuel icon.
 
-[^coremain]: The main loop of the mod is then as such:
+<p id="coremain"> The main loop of the mod is then as such:</p>
 
 ```lua
 local function on_nth_tick_tower_update(event)
@@ -100,6 +100,10 @@ Towers are a little more complex, but effectively obey the same rules for linkin
 
 The complexities start to arise when destroying entities. Mirrors simply remove themselves from their tower's link, but removing a tower requires going through every mirror, removing itself as it's closest, and linking it to the mirror's next closest tower (which is why we store other towers in range during creation- without this, destroying a tower created a large lag spike as each mirror searched from scratch for towers in range).
 
+### Mirror Rotations
+
+Mirrors are overrides of the `turret` prototype, with 0 range and no military presence, due to the fact that these prototypes are one of the very few in the game with support for rotationally-determined graphics[^rot]. From testing, despite the in theory more complex entity types, they did not contribute noticeably to the tick time, and I can only assume the engine identifies these 'turrets' as useless and excludes them from the weapon loop. Hopefully one day a generic rotatable entity base is added so this need not be a concern.
+
 ### Beams
 
 {{figure(src = "/projects/ch-concentrated-solar/beams.png" alt="Beams" caption = "First working beam graphics")}}
@@ -142,14 +146,20 @@ end
 
 ```
 
-The `mid` is multiplied by the prime 29 to give some randomness to beam placements, as entity indexes are assigned incrementally, so spawning based on just them clustered to beams (an effect that I actually liked, but was shot down by testers)
+The `mid` is multiplied by the prime 29 to give some randomness to beam placements, as entity indexes are assigned incrementally, so spawning based on just them clustered to beams[^2].
 
 ### Overlay
 
 {{figure(src = "/projects/ch-concentrated-solar/overlay.png" alt="Overlay" caption = "Early placement overlay")}}
 
 Turned out very easy to implement, as the game has very similar functionality for electrical systems - in the `defines.events.on_player_cursor_stack_changed` or `defines.events.on_selected_entity_changed`, check if the entity or stack in question is related to your system (in this case a tower or a mirror), and spawn bounding boxes for each important range-based entity (in this case, just towers).
-
+ 
 ---
+[^rot]: Another mod containing a feature with a similar mechanic of solar power used a separate entity for every mirror rotation, but I prefer turret prototype as it allows mirrors to be searched for quickly (different prototypes require unique names), and the number of rotation sprites can be changed in the future.
 
 [^1]: This did happen.
+
+[^2]: An effect that I actually liked, but my tester[^3] persuaded me against it.
+
+[^3]: My brother.
+

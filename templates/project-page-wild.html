@@ -1,0 +1,18 @@
+{% extends "project-page.html" %}
+
+{% block metadata %}
+<pre>
+<span style="color: var(--fg-font) !important;">DATE</span>: {{page.date}}
+<span style="color: var(--fg-font) !important;">TAGS</span>: 
+{%-if page.taxonomies.tags-%}
+{%-for tag in page.taxonomies.tags%} <a href={{ get_taxonomy_url(kind="tags" , name=tag) }}>{{tag}}</a>, 
+{%-endfor-%}
+{%-endif-%}
+{%if page.extra["repo"]-%} 
+<span style="color: var(--fg-font) !important;">REPO</span>: <a href={{ page.extra["repo"] }}>{{page.extra["repo"]}}</a>
+{%-endif-%}
+{%if page.extra["site"]%} 
+<span style="color: var(--fg-font) !important;">SITE</span>: <a href={{ page.extra["site"] }}>{{page.extra["site"]}}</a>
+{%-endif-%}
+</pre>
+{% endblock metadata %}

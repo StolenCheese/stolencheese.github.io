@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
+{%if page.ancestors%}
+{%set item = page%}
+{%elif section.ancestors%}
+{%set item = section%}
+{%endif%}
+
+
+{%if item.extra['style']%}
+{%set s = page.extra['style']%}
+{%else%}
+{%set s = 'main'%}
+{%endif%}
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Maxwell's Website</title>
-	<link rel="stylesheet" href="/main.css">
+	<link rel="stylesheet" href="/{{s}}.css">
 	{%block head%} {%endblock%}
 </head>
 
@@ -13,13 +26,8 @@
 
 	{% block header %}
 
-	{%if page.ancestors%}
-	{%set item = page%}
-	{%elif section.ancestors%}
-	{%set item = section%}
-	{%endif%}
 
-	<div class="top-bar">
+	<nav class="top-bar">
 		{%if item%}
 
 		{%for a in item.ancestors%}
@@ -39,14 +47,13 @@
 		<a href="/">Home</a>
 
 		{%endif%}
-	</div>
+	</nav>
 	{% endblock %}
 
-	<section class="content">
-		<div>
-			{% block content %} {% endblock %}
-		</div>
-	</section>
+	<div class="container">
+
+		{% block content %} {% endblock %}
+	</div>
 </body>
 
 </html>

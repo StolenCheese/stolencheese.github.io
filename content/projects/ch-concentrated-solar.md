@@ -1,12 +1,13 @@
 +++
 title = "Factorio Mod: Concentrated Solar Power"
-date = 2022-12-13
+date = 2022-12-13 
 [taxonomies]
 tags=["games", "lua", "blender"]
 [extra]
 repo = "https://github.com/StolenCheese/ch-concentrated-solar"
 site = "https://mods.factorio.com/mod/ch-concentrated-solar"
 img = "/projects/banner2.png"
+style= "fact"
 +++
 
 A Factorio mod I made over the christmas holiday, currently sitting at 809 downloads (!).
@@ -153,7 +154,7 @@ The `mid` is multiplied by the prime 29 to give some randomness to beam placemen
 {{figure(src = "/projects/ch-concentrated-solar/overlay.png" alt="Overlay" caption = "Early placement overlay")}}
 
 Turned out very easy to implement, as the game has very similar functionality for electrical systems - in the `defines.events.on_player_cursor_stack_changed` or `defines.events.on_selected_entity_changed`, check if the entity or stack in question is related to your system (in this case a tower or a mirror), and spawn bounding boxes for each important range-based entity (in this case, just towers).
- 
+
 ---
 [^rot]: Another mod containing a feature with a similar mechanic of solar power used a separate entity for every mirror rotation, but I prefer turret prototype as it allows mirrors to be searched for quickly (different prototypes require unique names), and the number of rotation sprites can be changed in the future.
 
@@ -162,4 +163,3 @@ Turned out very easy to implement, as the game has very similar functionality fo
 [^2]: An effect that I actually liked, but my tester[^3] persuaded me against it.
 
 [^3]: My brother.
-

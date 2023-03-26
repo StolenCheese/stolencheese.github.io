@@ -2,14 +2,14 @@
 
 {% block content %}
 
-
-
 <h1 class="title">
 	{{ page.title }}
 </h1>
 
+<div class="metadata">
+	{% block metadata %}
 
-<code>
+	<code>
 	{"date" : {{page.date}}, "tags" : [
 		{%-if page.taxonomies.tags-%} 
 		{%-for tag in page.taxonomies.tags-%}
@@ -20,11 +20,14 @@
 	{%- if page.extra["repo"] -%}, "repo":"<a href={{ page.extra["repo"] }}>...</a>"{%-endif-%}
 	{%- if page.extra["site"] -%}, "site":"<a href={{ page.extra["site"] }}>...</a>"{%-endif-%}
 }
-
 </code>
 
+	{% endblock metadata %}
+</div>
 
-</p>
 
-{{ page.content | safe }}
+<article>
+	{{ page.content | safe }}
+</article>
+
 {% endblock content %}

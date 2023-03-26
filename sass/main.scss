@@ -1,13 +1,27 @@
 :root {
-	--bg-grey: #f0f0f0;
+	--bg-header: #f0f0f0;
+	--fg-font: black;
+	--bg-main: white;
+	--bg-code: transparent;
+	--fg-link: blue;
+	--fg-visited: purple;
+	--fg-header: var(--fg-font);
+
 }
 
-
+// ------- STRUCTURES
 
 img {
 	max-width: 99%;
 	max-height: 99%;
 }
+
+html {
+	background-color: var(--bg-main);
+}
+
+
+// ------ TEXT
 
 button,
 input,
@@ -17,15 +31,48 @@ body,
 textarea {
 	font-family: 'Titillium Web', sans-serif;
 	tab-size: 2em;
+	color: var(--fg-font);
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+	color: var(--fg-header);
+}
+
+a:link {
+	color: var(--fg-link);
+}
+
+a:visited {
+	color: var(--fg-visited);
+}
+
+
+// ------ CODE
+// Code formatting basic
 pre,
 code {
 	font-family: 'Fira Code', Consolas, monospace;
 	font-size: small;
-
+	font-style: normal;
 	overflow-x: scroll;
 }
+
+pre {
+
+	background-color: var(--bg-code) !important;
+}
+
+code {
+
+	background-color: transparent !important;
+}
+
+
+// ------ BUTTONS
 
 button {
 	background-color: var(--bg-grey);
@@ -48,8 +95,9 @@ button:hover {
 	margin-right: 10%;
 }
 
+
 .top-bar {
-	background-color: var(--bg-grey);
+	background-color: var(--bg-header);
 	padding: 5px;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -133,6 +181,8 @@ button:hover {
 	height: 500px;
 }
 
+// Ensure all `indents` are equally far from the left
+figure,
 .footnote-definition {
 	margin-left: 4%;
 }

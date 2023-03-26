@@ -5,9 +5,10 @@ date = 2023-03-14
 tags=["cpp", "cs"]
 [extra]
 img = "/projects/midi.png"
+style="wild-partial"
 +++
-
-Winner: Best Professional Achievement, Nominated: Best Technical Achievement.
+ 
+Winner: [Most Impressive Professional Achievement](https://www.cst.cam.ac.uk/news/students-find-success-design-project-awards), Nominated: Most Impressive Technical Achievement[^0].
 
 <!-- more -->
 
@@ -15,7 +16,7 @@ Winner: Best Professional Achievement, Nominated: Best Technical Achievement.
 
 > Client: George Welch, IMC
 
-Sophisticated digital music composition tools like the Sonic Pi language rely on an internal architecture of samples, waveforms and filters. In the popular SuperCollider system, a new synthesiser is defined by software-wiring together these "UGens”. Your task is to create a SuperCollider client that looks like a retro-style modular synthesiser or guitar pedal board, where connecting literal wires between pictures of hardware modules on the screen will construct an exact digital equivalent within the SuperCollider server. A live audio input would give you a universal guitar pedal, sample mixing makes you a DJ/producer, or if bleeps and whooshes are your thing, you can impress your Grandpa by channelling Brian Eno in the glory days of Roxy Music.
+Sophisticated digital music composition tools like the Sonic Pi language rely on an internal architecture of samples, waveforms and filters. In the popular SuperCollider system, a new synthesiser is defined by software-wiring together these "UGens". Your task is to create a SuperCollider client that looks like a retro-style modular synthesiser or guitar pedal board, where connecting literal wires between pictures of hardware modules on the screen will construct an exact digital equivalent within the SuperCollider server. A live audio input would give you a universal guitar pedal, sample mixing makes you a DJ/producer, or if bleeps and whooshes are your thing, you can impress your Grandpa by channelling Brian Eno in the glory days of Roxy Music.
 
 ## Overall Experience
 
@@ -333,3 +334,6 @@ namespace SynthAPI {
 	};
 }
 ```
+
+---
+[^0]: based on the [video](https://www.youtube.com/watch?v=iWxWJKYrUTY&list=PLstyePOvf2d2ZvC92BQkpR6WiaiROytev&index=13) we made for it

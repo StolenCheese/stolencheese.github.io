@@ -1,0 +1,58 @@
+@import url('main.css');
+@import url('fonts/space-mono/space-mono.css');
+@import url('fonts/brandon-grotesque/brandon-grotesque.css');
+
+// Page formatting
+:root {
+	--bg-header: #322d29;
+	--bg-main: #383b40;
+	--fg-font: #d79b6b;
+	--fg-link: #ff7d25;
+	--fg-visited: #b95b1d;
+	--fg-code: #b1d1db;
+}
+
+.container {
+	margin: 12px;
+	padding: 12px;
+}
+
+body {
+	margin: 0;
+}
+
+.top-bar {
+	border-bottom: solid var(--fg-link) 0.3em;
+	margin: 0;
+}
+
+hr {
+	border-style: none none none;
+	border-top: dotted 2px var(--fg-font);
+}
+
+
+figure::after {
+	content: "............................................................................................................";
+}
+
+// Main text formatting
+
+button,
+input,
+optgroup,
+select,
+body,
+textarea {
+	font-family: 'Brandon Grotesque', sans-serif;
+}
+
+// Code formatting basic
+
+pre,
+code {
+	font-family: 'Space Mono', Consolas, monospace;
+	font-style: normal;
+	background-color: var(--bg-main) !important;
+	color: white;
+}

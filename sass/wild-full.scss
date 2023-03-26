@@ -1,0 +1,17 @@
+@import url('wild-partial.css');
+
+
+// Code formatting
+pre {
+	background: radial-gradient(ellipse closest-corner, #277c76, #02050b 90%);
+	background-attachment: local;
+	color: var(--fg-code) !important;
+	text-shadow: 0 0 0.1em var(--fg-code);
+	border: solid #484241 1em;
+	border-image: url("styles/wild/bg.png") 8 / 1em repeat;
+	padding: 1em;
+}
+
+pre * {
+	color: var(--fg-code) !important;
+}

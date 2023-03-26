@@ -1,0 +1,88 @@
+@import url('main.css');
+
+// Page formatting - mostly borrowed from Alt+F4, the community factorio blog
+:root {
+	--bg-header: #414040;
+	--bg-main: #414040;
+	--fg-font: white;
+	--fg-header: rgb(255, 230, 192);
+	--fg-link: rgb(154, 209, 234);
+	--fg-visited: rgb(154, 209, 234);
+	--fg-code: #b1d1db;
+
+	--bg-code: lightgray;
+}
+
+
+// Insetting effect
+
+img,
+pre {
+	border: none;
+	box-shadow: inset 0 0 3px 0 #000, 0 -2px 2px -1px #000, -2px 0 2px -2px #28221f, -2px 0 2px -2px #28221f, 2px 0 2px -2px #28221f, 2px 0 2px -2px #28221f, 0 3px 3px -3px #8f8c8b, 0 2px 2px -2px #8f8c8b, 0 1px 1px -1px #8f8c8b;
+}
+
+pre {
+	padding: 1em;
+	scroll-padding: 1em;
+	background-origin: content-box;
+}
+
+h1 {
+	margin-top: 0;
+}
+
+// Custom figures
+
+figcaption {
+	text-align: center;
+	font-style: italic;
+	font-size: 90%;
+	box-sizing: border-box;
+	border: 0;
+}
+
+// Background styles
+
+.top-bar {
+	background-color: rgba(0, 0, 0, .5);
+	margin: 0;
+}
+
+body {
+	background-image: url('styles/fact/bg.png');
+	margin: 0;
+}
+
+// contains the below two items
+.container {
+	background-color: #313031;
+	box-shadow: inset 3px 0 3px -3px #201815, inset 2px 0 2px -2px #201815, inset 1px 0 1px -1px #201815, inset 0 3px 3px -3px #8f8c8b, inset 0 2px 2px -2px #8f8c8b, inset 0 1px 1px -1px #8f8c8b, inset -3px 0 3px -3px #201815, inset -2px 0 2px -2px #201815, inset -2px 0 1px -1px #201815, inset 0 -3px 3px -3px #000, inset 0 -2px 2px -2px #000, inset 0 -1px 1px -1px #000, 0 0 2px 0 #201815, 0 0 4px 0 #201815;
+	margin: 12px;
+	padding: 12px;
+	width: 1200px;
+	max-width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-right: 16px;
+	padding-left: 16px;
+	flex-shrink: 0;
+	margin-bottom: 0;
+}
+
+
+// the two main content holders
+
+.metadata {
+	box-shadow: inset 0 0 3px 0 #000, 0 -2px 2px -1px #000, -2px 0 2px -2px #28221f, -2px 0 2px -2px #28221f, 2px 0 2px -2px #28221f, 2px 0 2px -2px #28221f, 0 3px 3px -3px #8f8c8b, 0 2px 2px -2px #8f8c8b, 0 1px 1px -1px #8f8c8b;
+	background-color: #242324;
+	padding: 12px;
+}
+
+
+article {
+	box-shadow: inset 0 0 3px 0 #000, 0 -2px 2px -1px #000, -2px 0 2px -2px #28221f, -2px 0 2px -2px #28221f, 2px 0 2px -2px #28221f, 2px 0 2px -2px #28221f, 0 3px 3px -3px #8f8c8b, 0 2px 2px -2px #8f8c8b, 0 1px 1px -1px #8f8c8b;
+	background-color: #414040;
+	padding: 12px;
+	margin-top: 0;
+}

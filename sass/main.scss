@@ -1,11 +1,16 @@
 :root {
 	--bg-header: #f0f0f0;
-	--fg-font: black;
-	--bg-main: white;
+	--bg-main: transparent;
 	--bg-code: transparent;
+	--bg-highlight: lightgray;
+	--bg-meta: transparent;
+	--bg-page: white;
+
+	--fg-font: black;
 	--fg-link: blue;
 	--fg-visited: purple;
 	--fg-header: var(--fg-font);
+
 
 }
 
@@ -18,6 +23,16 @@ img {
 
 html {
 	background-color: var(--bg-main);
+}
+
+
+// COLOURS AND STYLING
+
+
+body {
+	background-color: var(--bg-page);
+	margin: 0;
+	padding: 12px;
 }
 
 
@@ -76,13 +91,16 @@ code {
 
 button {
 	background-color: var(--bg-grey);
-	border-radius: 5px;
-	border-style: solid;
+	border: solid var(--bg-highlight) 5px;
 }
 
 button:hover {
-	background-color: lightgray;
+	background-color: var(--bg-highlight);
 	cursor: pointer;
+}
+
+button:hover * {
+	color: var(--bg-main);
 }
 
 .banner {
@@ -95,24 +113,20 @@ button:hover {
 	margin-right: 10%;
 }
 
-
+// Page layout
 .top-bar {
 	background-color: var(--bg-header);
-	padding: 5px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding: 12px;
 }
 
 .list-container {
 	columns: 2;
 	-webkit-columns: 2;
 	-moz-columns: 2;
-	padding: 5px;
 }
 
 .list-button {
 	display: block;
-	width: 100%;
 	min-height: 50px;
 	margin: 5px;
 	margin-top: 0;
@@ -140,6 +154,41 @@ button:hover {
 	margin: 5px;
 	padding: 5px;
 	background-color: var(--bg-grey);
+}
+
+
+.container {
+	background-color: var(--bg-main);
+	margin: 12px;
+	padding: 12px;
+	width: 1200px;
+	max-width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	flex-shrink: 0;
+	margin-bottom: 0;
+}
+
+
+
+// Images
+
+figure img {
+	vertical-align: top;
+}
+
+figure {
+	display: inline-block;
+	margin: 20px;
+	/* adjust as needed */
+}
+
+figure figcaption {
+	text-align: center;
+	font-style: italic;
+	font-size: 90%;
+	box-sizing: border-box;
+	border: 0;
 }
 
 

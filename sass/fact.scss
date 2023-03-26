@@ -2,15 +2,17 @@
 
 // Page formatting - mostly borrowed from Alt+F4, the community factorio blog
 :root {
-	--bg-header: #414040;
+	--bg-header: rgba(0, 0, 0, .5);
 	--bg-main: #414040;
+	--bg-page: #313031;
+	--bg-code: #313031;
+
 	--fg-font: white;
 	--fg-header: rgb(255, 230, 192);
 	--fg-link: rgb(154, 209, 234);
 	--fg-visited: rgb(154, 209, 234);
 	--fg-code: #b1d1db;
 
-	--bg-code: lightgray;
 }
 
 
@@ -45,18 +47,16 @@ figcaption {
 // Background styles
 
 .top-bar {
-	background-color: rgba(0, 0, 0, .5);
 	margin: 0;
 }
 
 body {
 	background-image: url('styles/fact/bg.png');
-	margin: 0;
+	padding: 0;
 }
 
 // contains the below two items
 .container {
-	background-color: #313031;
 	box-shadow: inset 3px 0 3px -3px #201815, inset 2px 0 2px -2px #201815, inset 1px 0 1px -1px #201815, inset 0 3px 3px -3px #8f8c8b, inset 0 2px 2px -2px #8f8c8b, inset 0 1px 1px -1px #8f8c8b, inset -3px 0 3px -3px #201815, inset -2px 0 2px -2px #201815, inset -2px 0 1px -1px #201815, inset 0 -3px 3px -3px #000, inset 0 -2px 2px -2px #000, inset 0 -1px 1px -1px #000, 0 0 2px 0 #201815, 0 0 4px 0 #201815;
 	margin: 12px;
 	padding: 12px;
@@ -82,7 +82,7 @@ body {
 
 article {
 	box-shadow: inset 0 0 3px 0 #000, 0 -2px 2px -1px #000, -2px 0 2px -2px #28221f, -2px 0 2px -2px #28221f, 2px 0 2px -2px #28221f, 2px 0 2px -2px #28221f, 0 3px 3px -3px #8f8c8b, 0 2px 2px -2px #8f8c8b, 0 1px 1px -1px #8f8c8b;
-	background-color: #414040;
+
 	padding: 12px;
 	margin-top: 0;
 }

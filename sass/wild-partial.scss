@@ -5,20 +5,17 @@
 // Page formatting
 :root {
 	--bg-header: #322d29;
-	--bg-main: #383b40;
+	--bg-page: #383b40;
+	--bg-main: var(--bg-page);
 	--fg-font: #d79b6b;
-	--fg-link: #ff7d25;
-	--fg-visited: #b95b1d;
+	--fg-link: #f07f3a;
+	--fg-visited: #f07f3a;
 	--fg-code: #b1d1db;
-}
-
-.container {
-	margin: 12px;
-	padding: 12px;
+	--bg-highlight: #fcdcc7;
 }
 
 body {
-	margin: 0;
+	padding: 0;
 }
 
 .top-bar {
@@ -36,6 +33,7 @@ figure::after {
 	content: "............................................................................................................";
 }
 
+
 // Main text formatting
 
 button,
@@ -45,6 +43,7 @@ select,
 body,
 textarea {
 	font-family: 'Brandon Grotesque', sans-serif;
+	font-size: 1rem;
 }
 
 // Code formatting basic

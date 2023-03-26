@@ -6,7 +6,10 @@
 		{%endfor%}
 	</div>
 	<div class="gallery-frame">
-		<img id="gallery-{{nth}}" src="{{images[0]}}" alt="{{alts[0]}}" />
+
+		<figure>
+			<img id="gallery-{{nth}}" src="{{images[0]}}" alt="{{alts[0]}}" />
+			<figcaption id="text-{{nth}}">{{alts[0]}}</figcaption>
+		</figure>
 	</div>
-	<blockquote id="text-{{nth}}">{{alts[0]}}</blockquote>
 </div>

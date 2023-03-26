@@ -5,6 +5,7 @@ date = 2023-03-13
 repo = "https://github.com/maxwell-gm206/maxwell-gm206.github.io"
 site = "https://maxwell-gm206.github.io"
 img =  "/projects/meta.png"
+style="main"
 +++
 
 This website is built off [Zola](https://github.com/getzola/zola), a very neat rust based static site generator that allows me to be writing this text in markdown, and separating the job of making the html and css into something I have to do later. <!-- more --> If I ever want to add css at all that is, there is definitely something very nostalgic about blank websites. Not great for phone use though.

@@ -15,10 +15,11 @@
 		{%-for tag in page.taxonomies.tags-%}
 		"<a href={{ get_taxonomy_url(kind="tags", name=tag) }}>{{tag}}</a>",
 		{%-endfor-%}
-		{%-endif-%}] 
-	}
+		{%-endif-%}
+	] 
 	{%- if page.extra["repo"] -%}, "repo":"<a href={{ page.extra["repo"] }}>...</a>"{%-endif-%}
 	{%- if page.extra["site"] -%}, "site":"<a href={{ page.extra["site"] }}>...</a>"{%-endif-%}
+	
 }
 </code>
 

@@ -28,6 +28,19 @@ hr {
 	border-top: dotted 2px var(--fg-font);
 }
 
+// Buttons
+button {
+	padding: 0;
+}
+
+button>* {
+	margin: 12px;
+}
+
+button div {
+	margin: 0px;
+}
+
 
 figure::after {
 	content: "............................................................................................................";

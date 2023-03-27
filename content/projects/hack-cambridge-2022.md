@@ -6,9 +6,10 @@ tags=["python"]
 [extra]
 site = "https://devpost.com/software/youtube-wiki-referencer" 
 img = "/projects/tomscott.jpg"
+style="moss"
 +++
 
-24hr hackathon.
+24hr hackathon.[^1]
 
 <!-- more -->
 
@@ -18,3 +19,6 @@ The project we came up with was pretty neat:
 {{figure(src = "/projects/tomscott.jpg" alt="Tom Scott" caption = "Working Extension")}}
 
 {{figure(src = "/projects/dataflow.jpg" alt="Dataflow" caption = "Diagram made for the dataflow, in an attempt to grab the most weird flow prize. Little did we know this was far from the weirdest")}}
+
+---
+[^1]: lifted from <a href="https://conallmoss.github.io/">Conall</a>.

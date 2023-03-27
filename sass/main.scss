@@ -7,10 +7,12 @@
 	--bg-page: white;
 
 	--fg-font: black;
+	--fg-font-header: var(--fg-font);
 	--fg-link: blue;
 	--fg-visited: purple;
 	--fg-header: var(--fg-font);
 
+	--font-family: 'Titillium Web', sans-serif;
 
 }
 
@@ -44,10 +46,16 @@ optgroup,
 select,
 body,
 textarea {
-	font-family: 'Titillium Web', sans-serif;
+	font-family: var(--font-family);
 	tab-size: 2em;
 	color: var(--fg-font);
 }
+
+.top-bar {
+	color: var(--fg-font-header);
+	padding: 16px;
+}
+
 
 h1,
 h2,

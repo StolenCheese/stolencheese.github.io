@@ -21,4 +21,4 @@ The project we came up with was pretty neat:
 {{figure(src = "/projects/dataflow.jpg" alt="Dataflow" caption = "Diagram made for the dataflow, in an attempt to grab the most weird flow prize. Little did we know this was far from the weirdest")}}
 
 ---
-[^1]: lifted from <a href="https://conallmoss.github.io/">Conall</a>.
+[^1]: thanks <a href="https://conallmoss.github.io/">Conall</a>.

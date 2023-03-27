@@ -25,7 +25,7 @@ body {
 
 hr {
 	border-style: none none none;
-	border-top: dotted 2px var(--fg-font);
+	border-top: dotted 2px var(--fg-link);
 }
 
 // Buttons
@@ -43,9 +43,17 @@ button div {
 
 
 figure::after {
+	color: var(--fg-link);
 	content: "............................................................................................................";
 }
 
+blockquote,
+figure,
+.footnote-definition {
+	margin-left: -2px;
+	padding-left: 4%;
+	border-left: dotted var(--fg-link) 2px;
+}
 
 // Main text formatting
 

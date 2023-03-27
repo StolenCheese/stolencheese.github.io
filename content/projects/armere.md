@@ -1,6 +1,7 @@
 +++
 title = "Armere"
 date = 2020-05-21
+description="All of my hobby projects up until 2022 in one big bundle."
 [taxonomies]
 tags=["games", "cs"]
 [extra]

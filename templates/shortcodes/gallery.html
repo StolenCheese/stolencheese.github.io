@@ -2,7 +2,9 @@
 	<div class="gallery-slider">
 
 		{%for i in range(end = images | length)%}
-		<img src="{{images[i]}}" alt="{{alts[i]}}" onclick="var img = getElementById('gallery-{{nth}}'); img.src = src; img.alt = alt; var t = getElementById('text-{{nth}}'); t.innerText  = alt" />
+
+		{%-set image = resize_image(path=images[i], width=128, height=128)-%}
+		<img src="{{image.url}}" width="128" height="128" alt="{{alts[i]}}" onclick="var img = getElementById('gallery-{{nth}}'); img.src = '{{images[i]}}'; img.alt=alt; var t=getElementById('text-{{nth}}'); t.innerText=alt" />
 		{%endfor%}
 	</div>
 	<div class="gallery-frame">

@@ -5,7 +5,7 @@
 	{%-set src = page.extra["img"]-%}
 	{%-set image = resize_image(path=src, width=720, height=128)-%}
 	<div>
-		<img src="{{ image.url }}" />
+		<img src="{{ image.url }}" width="{{image.width}}" height="{{image.height}}" alt="{{page.title|safe}} banner" />
 	</div>
 	{%-endif-%}
 </button>

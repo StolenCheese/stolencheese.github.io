@@ -14,9 +14,8 @@ Winner: [Most Impressive Professional Achievement](https://www.cst.cam.ac.uk/new
 
 ## Original Brief
 
-> Client: George Welch, IMC
-
-Sophisticated digital music composition tools like the Sonic Pi language rely on an internal architecture of samples, waveforms and filters. In the popular SuperCollider system, a new synthesiser is defined by software-wiring together these "UGens". Your task is to create a SuperCollider client that looks like a retro-style modular synthesiser or guitar pedal board, where connecting literal wires between pictures of hardware modules on the screen will construct an exact digital equivalent within the SuperCollider server. A live audio input would give you a universal guitar pedal, sample mixing makes you a DJ/producer, or if bleeps and whooshes are your thing, you can impress your Grandpa by channelling Brian Eno in the glory days of Roxy Music.
+> _Client: George Welch, IMC_ <br/><br/>
+> Sophisticated digital music composition tools like the Sonic Pi language rely on an internal architecture of samples, waveforms and filters. In the popular SuperCollider system, a new synthesiser is defined by software-wiring together these "UGens". Your task is to create a SuperCollider client that looks like a retro-style modular synthesiser or guitar pedal board, where connecting literal wires between pictures of hardware modules on the screen will construct an exact digital equivalent within the SuperCollider server. A live audio input would give you a universal guitar pedal, sample mixing makes you a DJ/producer, or if bleeps and whooshes are your thing, you can impress your Grandpa by channelling Brian Eno in the glory days of Roxy Music.
 
 ## Overall Experience
 
@@ -24,25 +23,27 @@ My overall experience with the project was positive; all members of the team mos
 
 In terms of code, the largest issues with the (my region, backend of) project was the lack of unit tests on higher levels of the code - all tests where implementation tests, meaning testing higher level units in isolation was impossible and proved not useful to debug, although very useful to verify the entire project was working. The solution to this would have been to make a dummy library to take the place of lower level ones and substituting out objects for dummies, then testing the state of those instead of the root supercollider servers.
 
-![MIDI Module](/projects/midi.png)
+{{figure(src="/projects/midi.png" alt="MIDI Module" caption="A MIDI module wired to many organ synths")}}
 
 ## Personal Contribution
 
-My first work was experimenting with control of a supercollider server in python, which taught me a lot about the workings of the server and gave us early knowledge about the capabilities and limitations of the server. This prototype was based around a simple command line control, with no UI, and gave us the first set of synthdefs (audio functions), and midi playback, although these were both to be heavily improved.
+My first work was experimenting with the control of a <abbr title="SuperCollider">SC</abbr> server in python, which taught me a lot about its communication nuances and gave us early knowledge about its capabilities and limitations. This prototype was based around a simple command line interface, and with it I coded the first set of synthdefs (audio functions) in the SC language, and midi playback, although these were both to be heavily improved.
 
-My next work was in the C++ source code. (Aside: why did we code the backend in C++, when it's purpose was to manage a web API and the front was written in C#? Because teamwork requires compromise, and the other backend members wanted C++ experience). I started by setting up a CMake build chain that would be used through the project, splitting the layers of the backend that were to exist into individual libraries, which proved very useful for collaborative coding, as we could work on specific areas of code even if others were currently broken or undocumented.
+My next work was in the C++ source code[^c]. I started by setting up a CMake build chain that would be used through the project, splitting the layers of the backend that were to exist into individual libraries, which proved very useful for collaborative coding, as we could work on certain layers of the project even if others were currently broken or undocumented.
 
-The first lines of code written in C++ was a simple object oriented wrapper around the supercollider server, known as the SCOOP layer, allowing the upload of synthdefs, instantiation of synths, playing and pausing of synths, and assignment of constant parameters. With this done, the scale of implementing the rest of the OSC commands exposed by supercollider became daunting, so I switched to automatic code generation, resulting in almost 800 lines of automatically generated *and* autodoc'd C++ functions based on the documentation available on the website, which was a significant timesaver in the long run.
+The first lines of code written in C++ was a simple object oriented wrapper around the SC server, known as the SCOOP layer, allowing the upload of synthdefs, instantiation of synths, playing and pausing of synths, and assignment of constant parameters. With this done, the scale of implementing the rest of the OSC commands exposed by SC became daunting, so I switched to automatic code generation, resulting in almost 800 lines of automatically generated _and_ autodoc'd C++ functions based on the documentation available on the website, which was a significant timesaver in the long run.
 
-At this point, roughly week 5, the roadblock of backend/frontend communication had become an issue as our implementation goal of week three slipped further away, and I thought the method currently being looked at of a C-style API to interact with our already convoluted and very object oriented C++ project would likely not be finished in time for anyone to actually use it, so I introduced the C++/CLR (language? compiler?) to replace this, as it was specifically designed for this task, and much easier to work with (once you get past Microsoft's full lack of documentation).
+At this point, roughly week 5, the roadblock of backend/frontend communication had become an issue as our implementation goal of week three slipped further away, and I thought the method currently being looked at of a C-style API to interact with our already convoluted and very object oriented C++ project would likely not be finished in time for anyone to actually use it, so I introduced the <a href="https://en.wikipedia.org/wiki/C%2B%2B/CLI">C++/CLR</a> (language? compiler?) to replace this, as it was specifically designed for this task, and much easier to work with (once you get past Microsoft's full lack of documentation).
 
 C++/CLR compiles C++ code to the common language runtime, the same platform C# runs on, as well as exporting all required metadata to allow C# to consume the `.dll` file as a dotnet native library, giving very performant interop as the only meaningful marshalling required are to convert strings from C# 16 bit unicode to C style 8 bit ASKII strings. This module then links to the previously compiled libraries from the lower layers of the code, still compiled in native form, meaning after the interop stage we are running full performance C++ code.
 
-After this, I quickly implemented audio/control rate changes for buses and synths for use in the layer above, required to allow some synths to write into the parameters of other synths. My next big goal was implementing MIDI, which turned into a large task, but I was pretty happy with the result. The main challenge was this being the first sound creating module that wasn't represented on the server, but had to manually send commands to set the frequencies of notes being played over buses, which meant synths had to maintain a control thread to execute.
+After this, I quickly implemented audio/control rate changes for buses and synths for use in the layer above, required to allow some synths to write into the parameters of other synths, at which point the fundamentals of the library were complete. My next big goal was implementing MIDI, which turned into a large task, but I was pretty happy with the result. The main challenge was this being the first sound creating module that wasn't represented on the server, but had to manually send commands to set the frequencies of notes being played over buses, which meant synths had to maintain a control thread to execute.
 
 Testing the MIDI was a difficult task, as there were suddenly a huge amount more layers of things to go wrong, and a small collection of fixes made to support this includes: many bugs in the graph model automatic rate changing logic, fixing server model inconsistencies, and large changes to the C++/CLR marshalling layer to better support ports.
 
 The biggest issue with MIDI compared to synthesisers are the limitation of synthesisers playing a single note at a time. My ideal solution to this would have been to allow the `Bus` class to represent multiple server side busses to carry a collection of frequencies at once, and similarly duplicate synths on the server side. Most of the work for this was done, but due to time constraints could not be fully implemented, meaning each midi channel could only output 2 notes, and required them to be outputted into 2 distinct synths, resulting in 32 ports on the midi module, which was not very intuitive. An existing issue with rate switching logic also meant the midi controller could not output to all synth types, notably only working when connected to the organ module.
+
+---
 
 ## Contributions of Other Members
 
@@ -69,6 +70,8 @@ They were also very involved to project management, organising meetings with the
 ### 5. █████ █████
 
 █████ worked on the json representation of modules for the instantiation of their set of UI components and graphics. This worked with a two file system, one file defining what parameters a synthdef contained and their limits, and another file defining how these parameters would be represented with components on a module. This allowed for multiple modules referring to the same synthdef, useful for when different synthdefs could produce a large variety of sounds, for example the `sin-ar` synthdef which could be used for low frequency 0-20Hz control, or audible frequency 100-10000Hz to produce sounds, and separating these use cases into two modules was very useful.
+
+---
 
 ## Source Code
 
@@ -221,6 +224,8 @@ void MidiSynth::ControlLoop(std::string const& source)
 
 ```
 
+---
+
 Here is an example of the original C++/CLR template designed with the first working interop.
 
 ```cpp
@@ -319,4 +324,6 @@ namespace SynthAPI {
 ```
 
 ---
-[^0]: based on the [video](https://www.youtube.com/watch?v=iWxWJKYrUTY&list=PLstyePOvf2d2ZvC92BQkpR6WiaiROytev&index=13) we made for it
+[^0]: based on the [video](https://www.youtube.com/watch?v=iWxWJKYrUTY&list=PLstyePOvf2d2ZvC92BQkpR6WiaiROytev&index=13) we made for it.
+
+[^c]: Why did we code the backend in C++, when it's purpose was to manage a web API and the front was written in C#? Because teamwork requires compromise, and the other backend members wanted C++ experience.

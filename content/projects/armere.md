@@ -24,7 +24,7 @@ blades of grass.
 
 ![Grass](/projects/armere/grass.png)
 
-This grass I remember absolutely killing me when I first made it. Before the explanation, have some progress images:
+This grass I remember absolutely killing me when I first made it. Inspired in no small part by a certain open world switch game. Before the explanation, have some progress images:
 
 {{gallery(
 	images = ["/projects/armere/grass-0.png","/projects/armere/grass-1.png","/projects/armere/grass-2.png","/projects/armere/grass-3.png"]
@@ -38,6 +38,20 @@ Using draw instanced indirect functionality, I have been able to (after many att
 A chunk system is used stored as a quad-tree to enable quick loading and unloading of grass blades, represented as blocks of GPU memory.
 
 Grass blades can also be destroyed using compute shaders, for example the destroy grass in bounds event channel will mark every blade of grass in the bounds as dead, then while rendering, a prefix parallel sum pass is performed to pack all living blades into a separate buffer for rendering.
+
+## Volumetrics
+
+![Volumetrics](/projects/armere/volumetric.jpg)
+
+A post processing effect for the URP pipeline, added to the pipeline as a 'Render Feature'.
+
+The effect created world space volumetric lighting for beams cast from the main directional light in the scene, based on a low resolution ray march through the scene depth map and the sun's shadow map to measure total transmission to the camera, although it was not physically based.
+
+## Cel Shading
+
+![Cel Shader](/projects/armere/cel.png)
+
+Similar inspiration to the grass, a cel shader for NPCs and the player character. A mostly standard Blinn–Phong shader with the addition of toon like ramping and a rim highlighting fresnel, with support for many engine features such as cubemapped reflections (also rendered into cel) and ambient occlusion.
 
 ## Gameplay
 
@@ -68,12 +82,12 @@ so how much force and torque should be enacted on the object. This is done in pa
 ![Tree chop](/projects/armere/tree_chop.png)
 
 Chopping down trees creates dynamic tree meshes as the trunks have cuts marked into them and are eventually felled.
+
 Chops reveal the rings inside the tree by using a separate texture and material for tris created inside the trunk.
 This is also done in parallel using burst resulting in very quick performance.
 
 ## Water
 
-Swimming in water creates a particle effect that leaves ripples behind the player. Any items entering or exiting water create their
-own splashes and ripples.
+Swimming in water creates a particle effect that leaves ripples behind the player. Any items entering or exiting water create their own splashes and ripples.
 
 ![Water Trail](/projects/armere/water_trail.png)

@@ -2,9 +2,80 @@
 
 {%block head%}
 <meta name="google-site-verification" content="oqWz1iA6L1SYYqn9eBIdK0lMCgB5Ewxd8ntE9xpohEs" />
+<link rel="stylesheet" href="/tf2.css">
+<script>
+	const messages = Array("pipi ike", "firesnipe360", "alchemist864", "wilddog551", "maxdogpax", "atlas");
+	const icons = Array("revolver", "slingshot", "sawed-off-shotgun", "rope-dart");
+
+
+	function create_entry() {
+
+		const feed_template = document.getElementById('feed-template');
+		const entryClone = feed_template.content.cloneNode(true)
+		const target = entryClone.querySelector('.red');
+		target.textContent = messages[Math.floor(Math.random() * messages.length)];
+
+		const img = entryClone.querySelector('img');
+		img.src = "icon/" + icons[Math.floor(Math.random() * icons.length)] + ".svg";
+
+		feed.appendChild(entryClone);
+
+
+		//const entry = document.createElement("div");
+		//const entry_outer = document.createElement("div");
+		//entry_outer.setAttribute("class", "entry");
+		//entry_outer.appendChild(entry);
+		//
+		//const l = document.createElement("spam");
+		//l.setAttribute("class", "blue txt");
+		//
+		//const i = document.createElement("img");
+		//i.setAttribute("src", );
+		//i.setAttribute("class", "icon");
+		//
+		//
+		//const r = document.createElement("spam");
+		//r.setAttribute("class", "red txt");
+		//
+		//l.innerText = "StolenCheese";
+		//r.innerText = messages[Math.floor(Math.random() * messages.length)];
+		//
+		//entry.appendChild(l);
+		//entry.appendChild(i);
+		//entry.appendChild(r);
+
+
+
+		setTimeout(function () {
+			feed.removeChild(feed.childNodes[1]);
+		}, 3000);
+
+		var audio = new Audio('https://wiki.teamfortress.com/w/images/0/0f/Crit_hit.wav');
+		audio.volume = 0.5;
+		audio.play();
+	}
+
+</script>
 {%endblock%}
 
 {% block content %}
+
+<div id="overlay" class="pc-only">
+	<div id="feed">
+		<template id="feed-template">
+			<div class="entry">
+				<div>
+					<span class="blue txt">StolenCheese</span>
+
+					<img src="icon/slingshot.svg" width="60" height="60" class="icon" />
+
+
+					<span class="red txt">ModularSynth</span>
+				</div>
+			</div>
+		</template>
+	</div>
+</div>
 
 <h1 class="title">
 	Maxwell-<a href="https://en.wikipedia.org/wiki/Maxwell_%28microarchitecture%29#Second_generation_Maxwell_(GM20x)">GM206</a>
@@ -12,7 +83,11 @@
 <h2>
 	Website/Portfolio/thing
 </h2>
-<p>Click <a href="{{ get_url(path='@/projects/_index.md') }}">here</a> to see my projects, and <a href="{{ get_url(path='@/thoughts/_index.md') }}">here</a> for whatever other stuff.</p>
+<p>
+	Click <a href="{{ get_url(path='@/projects/_index.md') }}">here</a> to see my projects,
+	and <a href="{{ get_url(path='@/thoughts/_index.md') }}">here</a> for whatever other stuff.
+	<span class="pc-only">And <a href="javascript:create_entry();">here</a> to score.</span>
+</p>
 
 <!-- {% for page in section.subsections %}
 
@@ -40,3 +115,7 @@
 </div>
 
 {% endblock content %}
+
+{%block subfooter%}
+Feed icons made by Delapouite. Available on <a href="https://game-icons.net">game-icons.net</a>
+{%endblock%}

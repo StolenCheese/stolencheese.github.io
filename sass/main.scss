@@ -276,11 +276,18 @@ figure,
 	margin-bottom: 20px;
 }
 
+.pc-only {}
+
+
 @media (max-width: 500px) {
 	.list-container {
 		columns: 1;
 		-webkit-columns: 1;
 		-moz-columns: 1;
+	}
+
+	.pc-only {
+		display: none !important;
 	}
 
 	.content {

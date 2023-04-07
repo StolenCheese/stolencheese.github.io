@@ -9,14 +9,9 @@ repo = "https://github.com/pettett/Armere"
 img="/projects/armere/grass.png"
 +++
 
-All of my hobby projects up until 2022 in one big bundle. <!-- more --> This was my main introduction to large codebases, to this day I think it
-went pretty well all things considered, and it certainly taught me a huge amount about organisation, making code that I can actually read,
-got me to start using vscode, and how to use git (or at least the github desktop app).
+All of my hobby projects up until 2022 in one big bundle. <!-- more --> This was my main introduction to large codebases, to this day I think it went pretty well all things considered, and it certainly taught me a huge amount about organisation, making code that I can actually read, got me to start using vscode, and how to use git (or at least the github desktop app).
 
-Communications between different projects (mechanics) are structured through event driven dependency injection,
-using Unity's scriptable objects acting as event delegates (Mechanics/ScriptableObjects/EventChannels). Examples of these
-are connecting the enemy death event to spawning interact-able items, or connecting the player's sword swing to destroying
-blades of grass.
+Communications between different projects (mechanics) are structured through event driven dependency injection, using Unity's scriptable objects acting as event delegates (Mechanics/ScriptableObjects/EventChannels). Examples of these are connecting the enemy death event to spawning interact-able items, or connecting the player's sword swing to destroying blades of grass.
 
 ![Waterfall](/projects/armere/waterfall.png)
 
@@ -55,18 +50,13 @@ Similar inspiration to the grass, a cel shader for NPCs and the player character
 
 ## Gameplay
 
-The `playercontroller` system is state driven and has a lot of functionality, including running Yarn dialogue
-during any "interactions" triggered, and full movement including swimming and climbing (on specific vine walls)
-The player is attached to it's inventory and quest book for item and goal usage.
+The `playercontroller` system is state driven and has a lot of functionality, including running Yarn dialogue during any "interactions" triggered, and full movement including swimming and climbing (on specific vine walls) The player is attached to it's inventory and quest book for item and goal usage.
 
-The NPCs follow routines based on the time of day, and each store there own inventory locally, allowing for any
-NPC to engage in trade if the dialogue command is triggered.
+The NPCs follow routines based on the time of day, and each store there own inventory locally, allowing for any NPC to engage in trade if the dialogue command is triggered.
 
-The save load system and game constructor are used to save game state directly into binary, although eventually
-this will use the messagepack format.
+The save load system and game constructor are used to save game state directly into binary, although eventually this will use the messagepack format.
 
-Enemies and Animals use a similar state based system as the `playercontroller` to perform (at the moment very basic)
-activities.
+Enemies and Animals use a similar state based system as the `playercontroller` to perform (at the moment very basic) activities.
 
 ## Physics
 

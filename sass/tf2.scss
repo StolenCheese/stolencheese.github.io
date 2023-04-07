@@ -1,0 +1,78 @@
+#overlay {
+	position: fixed;
+	/* Sit on top of the page content */
+	display: block;
+	/* Hidden by default */
+	width: 100%;
+	/* Full width (cover the whole page) */
+	height: 100%;
+	/* Full height (cover the whole page) */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: none;
+	pointer-events: none;
+	/* Black background with opacity */
+	z-index: 2;
+	/* Specify a stack order in case you're using a different order for other elements */
+
+	/* Add a pointer on hover */
+}
+
+#overlay>#feed {
+	margin-left: auto;
+	font-family: 'Verdana', sans-serif;
+	font-weight: bold;
+	padding: 8px;
+	display: table;
+}
+
+.entry {
+	display: table-row;
+}
+
+.entry div {
+
+	background-color: #f1e9cb;
+	border-radius: 8px;
+	margin: 8px;
+	padding: 4px 32px 4px 32px;
+	float: right;
+	clear: left;
+
+}
+
+.entry::after {
+	content: '\A';
+	white-space: pre;
+}
+
+
+.red {
+	color: #a3574a;
+}
+
+.icon {
+	color: #3d3923;
+}
+
+.blue {
+	color: #557c83;
+}
+
+.txt {
+	margin: 8px;
+	display: inline-block;
+	font-size: 1rem;
+}
+
+.icon {
+	margin: auto;
+	display: inline-block;
+	width: 36px;
+	height: 36px;
+	vertical-align: calc(-19px + 50%);
+
+	background: radial-gradient(closest-side, #e17760 10%, #f1e9cb);
+}

@@ -3,59 +3,7 @@
 {%block head%}
 <meta name="google-site-verification" content="oqWz1iA6L1SYYqn9eBIdK0lMCgB5Ewxd8ntE9xpohEs" />
 <link rel="stylesheet" href="/tf2.css">
-<script>
-	const messages = Array("pipi ike", "firesnipe360", "alchemist864", "wilddog551", "maxdogpax", "atlas");
-	const icons = Array("revolver", "slingshot", "sawed-off-shotgun", "rope-dart");
-
-
-	function create_entry() {
-
-		const feed_template = document.getElementById('feed-template');
-		const entryClone = feed_template.content.cloneNode(true)
-		const target = entryClone.querySelector('.red');
-		target.textContent = messages[Math.floor(Math.random() * messages.length)];
-
-		const img = entryClone.querySelector('img');
-		img.src = "icon/" + icons[Math.floor(Math.random() * icons.length)] + ".svg";
-
-		feed.appendChild(entryClone);
-
-
-		//const entry = document.createElement("div");
-		//const entry_outer = document.createElement("div");
-		//entry_outer.setAttribute("class", "entry");
-		//entry_outer.appendChild(entry);
-		//
-		//const l = document.createElement("spam");
-		//l.setAttribute("class", "blue txt");
-		//
-		//const i = document.createElement("img");
-		//i.setAttribute("src", );
-		//i.setAttribute("class", "icon");
-		//
-		//
-		//const r = document.createElement("spam");
-		//r.setAttribute("class", "red txt");
-		//
-		//l.innerText = "StolenCheese";
-		//r.innerText = messages[Math.floor(Math.random() * messages.length)];
-		//
-		//entry.appendChild(l);
-		//entry.appendChild(i);
-		//entry.appendChild(r);
-
-
-
-		setTimeout(function () {
-			feed.removeChild(feed.childNodes[1]);
-		}, 3000);
-
-		var audio = new Audio('https://wiki.teamfortress.com/w/images/0/0f/Crit_hit.wav');
-		audio.volume = 0.5;
-		audio.play();
-	}
-
-</script>
+<script type="text/javascript" src="tf2.js"> </script>
 {%endblock%}
 
 {% block content %}

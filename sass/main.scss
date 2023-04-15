@@ -50,6 +50,15 @@ body {
 }
 
 
+.webgl {
+	textarea {
+		width: 100%;
+		resize: none;
+		overflow: visible;
+	}
+}
+
+
 // COLOURS AND STYLING
 
 
@@ -66,8 +75,7 @@ button,
 input,
 optgroup,
 select,
-body,
-textarea {
+body {
 	font-family: var(--font-family);
 	tab-size: 2em;
 	color: var(--fg-font);
@@ -99,7 +107,8 @@ a:visited {
 // ------ CODE
 // Code formatting basic
 pre,
-code {
+code,
+textarea {
 	font-family: 'Fira Code', Consolas, monospace;
 	font-size: small;
 	font-style: normal;

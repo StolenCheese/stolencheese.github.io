@@ -1,8 +1,7 @@
-const messages = ["OilySeal", "MediumMonty", "marmaladesparrow", "SquidgySnakeEgg", "ChickenDe", "Fishsticks 2", "pod monkey", "pipi ike", "firesnipe360", "alchemist864", "wilddog551", "maxdogpax", "atlas"];
+const messages = ["OilySeal", "MediumMonty", "marmaladesparrow", "SquidgySnakeEgg", "Sol_the_EPIC", "ChickenDe", "Fishsticks 2", "pod monkey", "pipi ike", "firesnipe360", "alchemist864", "wilddog551", "maxdogpax", "atlas"];
 const icons = ["revolver", "slingshot", "sawed-off-shotgun", "rope-dart", "oil-can", "panzerfaust", "uzi"];
 
 function create_entry() {
-
 	var audio = new Audio('https://wiki.teamfortress.com/w/images/0/0f/Crit_hit.wav');
 	audio.volume = 0.25;
 	audio.play();
@@ -20,6 +19,4 @@ function create_entry() {
 	setTimeout(function () {
 		feed.removeChild(feed.childNodes[1]);
 	}, 3000);
-
-
 }

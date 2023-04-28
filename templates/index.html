@@ -2,9 +2,28 @@
 
 {%block head%}
 <meta name="google-site-verification" content="oqWz1iA6L1SYYqn9eBIdK0lMCgB5Ewxd8ntE9xpohEs" />
+<link rel="stylesheet" href="/tf2.css">
+<script type="text/javascript" src="tf2.js"> </script>
 {%endblock%}
 
 {% block content %}
+
+<div id="overlay" class="pc-only">
+	<div id="feed">
+		<template id="feed-template">
+			<div class="entry">
+				<div>
+					<span class="blue txt">StolenCheese</span>
+
+					<img src="icon/slingshot.svg" width="60" height="60" class="icon" />
+
+
+					<span class="red txt">ModularSynth</span>
+				</div>
+			</div>
+		</template>
+	</div>
+</div>
 
 <h1 class="title">
 	Maxwell-<a href="https://en.wikipedia.org/wiki/Maxwell_%28microarchitecture%29#Second_generation_Maxwell_(GM20x)">GM206</a>
@@ -12,7 +31,11 @@
 <h2>
 	Website/Portfolio/thing
 </h2>
-<p>Click <a href="{{ get_url(path='@/projects/_index.md') }}">here</a> to see my projects, and <a href="{{ get_url(path='@/thoughts/_index.md') }}">here</a> for whatever other stuff.</p>
+<p>
+	Click <a href="{{ get_url(path='@/projects/_index.md') }}">here</a> to see my projects,
+	and <a href="{{ get_url(path='@/thoughts/_index.md') }}">here</a> for whatever other stuff.
+	<span class="pc-only">And <a href="javascript:create_entry();">here</a> to score.</span>
+</p>
 
 <!-- {% for page in section.subsections %}
 
@@ -40,3 +63,7 @@
 </div>
 
 {% endblock content %}
+
+{%block subfooter%}
+Feed icons made by Delapouite. Available on <a href="https://game-icons.net">game-icons.net</a>
+{%endblock%}

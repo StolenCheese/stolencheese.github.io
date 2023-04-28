@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script src='/webgl_renderer.js'></script>
+
+<script src="lib/codemirror.js"></script>
+<link rel="stylesheet" href="lib/codemirror.css">
+<script src="mode/javascript/javascript.js"></script>
+
+<script type="module">
+	import init, { WebClient } from '/webgl_renderer.js';
+
+
+	async function displayMesh(uri) {
+		// just set the lua to display only the mesh
+
+		document.getElementById('onload').value = `let data= [
+#{
+	type:"water",
+	reflectivity: 0.5,
+	fresnel_strength: 1.5,
+	wave_speed: 0.06,
+	use_reflection: true,
+	use_refraction: true,
+},
+#{
+	type : "mesh",
+	position : [0,0,0],
+	mesh : "models/` + uri + `",
+	update : |ent|{
+		ent.position[1] += 0.1;
+	}
+}, 
+]; 
+return data;`
+
+		restart()
+	}
+
+
+	var textarea = document.getElementById("onload");
+
+	textarea.oninput = function () {
+		textarea.style.height = ""; /* Reset the height*/
+		textarea.style.height = textarea.scrollHeight + "px";
+	};
+
+	async function restart() {
+		document.getElementById('onloadout').innerText = await window.webClient.restart(document.getElementById('onload').value)
+	}
+
+
+	window.restart = restart;
+
+	window.displayMesh = displayMesh;
+
+	async function run() {
+
+
+
+
+		await init();
+
+		// Start our rust application. You can find `WebClient` in `src/lib.rs`
+		const webClient = new WebClient()
+		webClient.start()
+
+		window.webClient = webClient
+
+
+
+		let time = Date.now();
+		function render() {
+			const dt = Date.now() - time
+
+			webClient.update(dt)
+			webClient.render()
+			window.requestAnimationFrame(render)
+
+			time = Date.now()
+		}
+		restart()
+		render()
+	}
+
+	run(); 
+</script>
+
+
+
+
+
+<h1 class="title">
+	{{ page.title }}
+</h1>
+
+<div class="metadata">
+	{% block metadata %}
+
+	<code>
+	{"date" : {{page.date}}, "tags" : [
+		{%-if page.taxonomies.tags-%} 
+		{%-for tag in page.taxonomies.tags-%}
+		"<a href={{ get_taxonomy_url(kind="tags", name=tag) }}>{{tag}}</a>",
+		{%-endfor-%}
+		{%-endif-%}
+	] 
+	{%- if page.extra["repo"] -%}, "repo":"<a href={{ page.extra["repo"] }}>...</a>"{%-endif-%}
+	{%- if page.extra["site"] -%}, "site":"<a href={{ page.extra["site"] }}>...</a>"{%-endif-%}
+	
+}
+</code>
+
+	{% endblock metadata %}
+</div>
+
+
+<article>
+	{{ page.content | safe }}
+</article>
+
+{% endblock content %}

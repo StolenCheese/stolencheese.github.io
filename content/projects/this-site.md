@@ -2,8 +2,8 @@
 title = "This Website"
 date = 2023-03-13
 [extra]
-repo = "https://github.com/maxwell-gm206/maxwell-gm206.github.io"
-site = "https://maxwell-gm206.github.io"
+repo = "https://github.com/pettett/pettett.github.io"
+site = "https://pettett.github.io"
 img =  "/projects/meta.png"
 style="main"
 +++

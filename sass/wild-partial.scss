@@ -61,8 +61,7 @@ button,
 input,
 optgroup,
 select,
-body,
-textarea {
+body {
 	font-family: 'Brandon Grotesque', sans-serif;
 	font-size: 1rem;
 }
@@ -70,7 +69,8 @@ textarea {
 // Code formatting basic
 
 pre,
-code {
+code,
+textarea {
 	font-family: 'Space Mono', Consolas, monospace;
 	font-style: normal;
 	background-color: var(--bg-main) !important;

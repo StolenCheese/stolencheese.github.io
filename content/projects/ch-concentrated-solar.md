@@ -4,7 +4,7 @@ date = 2022-12-13
 [taxonomies]
 tags=["games", "lua", "blender"]
 [extra]
-repo = "https://github.com/StolenCheese/ch-concentrated-solar"
+repo = "https://github.com/pettett/ch-concentrated-solar"
 site = "https://mods.factorio.com/mod/ch-concentrated-solar"
 img = "/projects/banner2.png"
 style= "fact"

@@ -11,6 +11,11 @@ repo = "https://github.com/pettett/rs-embedded-micro-webgl2-engine"
 A small rust based webgl2 renderer.
 
 <!-- more -->
+
+The scene is loaded with a script written in the lua-like [Rhai](https://rhai.rs/). Press the restart button to load the scene.
+
+Supported features include normal mapping, multi-textured meshes, and planar reflections. Includes many bugs (written over a short time period as an experiment).
+
 {%webgl()%}
 let data= [
 	#{

@@ -3,7 +3,7 @@ title = "Cam Game Jam: Rhythm Mythril Fever"
 date = 2023-02-15
 template="project-page-wild.html"
 [taxonomies]
-tags=["games", "godot", "blender"]
+tags=["games", "blender"]
 [extra]
 site = "https://stolencheese.itch.io/rhythm-mythril-fever"
 img = "/projects/camgamjam/demo3.png"

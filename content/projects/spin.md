@@ -2,10 +2,15 @@
 title = "Webgl Engine"
 date = 2023-04-15
 template = "webgl.html" 
+[taxonomies]
+tags=["rust", "rendering"]
+[extra]
+repo = "https://github.com/pettett/rs-embedded-micro-webgl2-engine"
 +++
 
-Wooooooo
+A small rust based webgl2 renderer.
 
+<!-- more -->
 {%webgl()%}
 let data= [
 	#{

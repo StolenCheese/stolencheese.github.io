@@ -4,7 +4,7 @@ date = 2023-06-26
 [taxonomies]
 tags=["cpp", "games"]
 [extra]
-style="wild-partial"
+style="monokai"
 +++
 
 More to come...

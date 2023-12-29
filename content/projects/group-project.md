@@ -5,7 +5,6 @@ date = 2023-03-14
 tags=["cpp", "cs"]
 [extra]
 img = "/projects/midi.png"
-style="wild-partial"
 +++
  
 Winner: [Most Impressive Professional Achievement](https://www.cst.cam.ac.uk/news/students-find-success-design-project-awards), Nominated: Most Impressive Technical Achievement[^0].

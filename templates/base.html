@@ -11,7 +11,7 @@
 {%if item.extra['style']%}
 {%set s = page.extra['style']%}
 {%else%}
-{%set s = 'wild-partial'%}
+{%set s = 'monokai'%}
 {%endif%}
 
 <head>
@@ -24,8 +24,7 @@
 	<meta name="description" content="{{ page.summary  }}" />
 	{%endif%}
 
-	<title>Maxwell's Website</title>
-	<link rel="stylesheet" href="/main.css">
+	<title>Maxwell's Website</title> 
 	<link rel="stylesheet" href="/{{s}}.css">
 	{%block head%} {%endblock%}
 </head>
@@ -66,7 +65,7 @@
 	<footer class="footer">
 		{% block footer %}
 		<h2>
-			<a href="https://github.com/pettett">Github</a> | <a href="https://www.linkedin.com/in/maxwell-pettett/">LinkedIn</a> | maxwell pettett at gmail dot com | <a rel="me" href="https://mastodon.gamedev.place/@pettett">Mastodon</a> |  <a href="https://stolencheese2.tumblr.com/">Tumblr</a>
+			<a href="https://github.com/pettett">Github</a> | <a href="https://www.linkedin.com/in/maxwell-pettett/">LinkedIn</a> | maxwell pettett at gmail dot com | <a rel="me" href="https://mastodon.gamedev.place/@pettett">Mastodon</a>
 		</h2>
 		{% endblock footer %}
 		{%block subfooter%}

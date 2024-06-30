@@ -5,7 +5,8 @@ date = 2023-06-26
 tags=["cpp", "games"]
 [extra]
 style="monokai"
+img = "/projects/horizon.webp"
 +++
 
-More to come...
+I worked in the gameplay systems team on the AAA game _LEGO Horizon Adventures_ at Studio Gobo. More to come...
 <!-- more -->

@@ -10,7 +10,7 @@ img = "/projects/banner2.png"
 style= "fact"
 +++
 
-A Factorio mod I made over the christmas holiday, currently sitting at 809 downloads (!).
+A Factorio mod I made over the christmas holiday, currently sitting at over 25K downloads (!!).
 <!-- more -->
 
 <img src="https://mods.factorio.com/opengraph/mod/ch-concentrated-solar.png" alt= "Mod Opengraph Information Embed"  height="200px">

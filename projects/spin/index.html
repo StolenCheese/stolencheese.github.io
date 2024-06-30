@@ -1,0 +1,94 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta content="width=device-width,initial-scale=1" name=viewport><meta content="<p>A small rust based webgl2 renderer.</p>
+" name=description><title>Maxwell's Website</title><link href=/monokai.css rel=stylesheet><body><nav class=top-bar><a href=https://pettett.github.io/>Home</a> / <a href=https://pettett.github.io/projects/>List of my Projects</a> / Webgl Engine</nav><div class=container><script src=/webgl_renderer.js></script><style>.canvas {
+		width: 100%;
+		height: 100%;
+	}</style><script>async function loadExample(data) {
+		// just set the lua to display only the mesh
+		document.getElementById('onload').value = document.getElementById(data).innerText
+
+		await window.restart()
+	}
+
+	window.loadExample = loadExample;</script><script type=module>import init, { WebClient } from '/webgl_renderer.js';
+
+
+
+	async function restart() {
+		document.getElementById('onloadout').innerText = await window.webClient.restart(document.getElementById('onload').value)
+	}
+
+
+	window.restart = restart;
+
+
+	async function run() {
+
+		await init();
+
+		// Start our rust application. You can find `WebClient` in `src / lib.rs`
+		const webClient = new WebClient()
+		webClient.start()
+
+		window.webClient = webClient
+
+		window.addEventListener('keydown', (e) => webClient.on_key_down(e.keyCode));
+		window.addEventListener('keyup', (e) => webClient.on_key_up(e.keyCode));
+
+		const canvas = document.getElementById('webgl-water-tutorial').firstChild;
+
+		function resizeCanvasToDisplaySize() {
+			// Lookup the size the browser is displaying the canvas in CSS pixels.
+			const displayWidth = canvas.clientWidth;
+			const displayHeight = canvas.clientHeight;
+
+			// Check if the canvas is not the same size.
+			const needResize = canvas.width !== displayWidth ||
+				canvas.height !== displayHeight;
+
+			if (needResize) {
+				// Make the canvas the same size
+				canvas.width = displayWidth;
+				canvas.height = displayHeight;
+			}
+
+			return needResize;
+		}
+
+
+
+		let time = Date.now();
+		function render() {
+			let needs_resize = resizeCanvasToDisplaySize();
+
+			const dt = Date.now() - time;
+
+			webClient.update(dt);
+			webClient.render();
+			window.requestAnimationFrame(render);
+
+			time = Date.now();
+		}
+
+		render()
+	}
+
+	run();</script><h1 class=title>Webgl Engine</h1><div class=metadata><code>
+	{"date" : 2023-04-15, "tags" : ["<a href=https://pettett.github.io/tags/rust/>rust</a>","<a href=https://pettett.github.io/tags/rendering/>rendering</a>",], "repo":"<a href=https://github.com/pettett/rs-embedded-micro-webgl2-engine>...</a>"}
+</code></div><article><p>A small rust based webgl2 renderer.</p><span id=continue-reading></span><p>The scene is loaded with a script written in the lua-like <a href=https://rhai.rs/>Rhai</a>. Press the restart button to load the scene.<p>Supported features include normal mapping, multi-textured meshes, and planar reflections. Includes many bugs (written over a short time period as an experiment).<div class=webgl><div id=webgl-water-tutorial></div><textarea style="outline: none;" autocapitalize=none autocorrect=off cols=63 id=onload rows=15 spellcheck=false tabindex=0 wrap=off>
+let data= [
+	#{
+		type : "mesh",
+		position : [0,-30,0],
+		scale: [10,10,10],
+		mesh : "assets/models/Sponza.gltf",
+	},
+	#{
+		type:"water",
+		reflectivity: 0.5,
+		fresnel_strength: 1.5,
+		wave_speed: 0.06,
+		use_reflection: true,
+		use_refraction: true,
+	},
+];
+return data;</textarea><button onclick=window.restart()>Restart</button><p id=onloadout></div></article></div><footer class=footer><h2><a href=https://github.com/pettett>Github</a> | <a href=https://www.linkedin.com/in/maxwell-pettett/>LinkedIn</a> | maxwell pettett at gmail dot com | <a href=https://mastodon.gamedev.place/@pettett rel=me>Mastodon</a></h2></footer>

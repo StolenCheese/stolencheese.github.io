@@ -1,0 +1,240 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta content="width=device-width,initial-scale=1" name=viewport><meta content='<p>Winner: <a href="https://www.cst.cam.ac.uk/news/students-find-success-design-project-awards">Most Impressive Professional Achievement</a>, Nominated: Most Impressive Technical Achievement.</p>
+' name=description><title>Maxwell's Website</title><link href=/monokai.css rel=stylesheet><body><nav class=top-bar><a href=https://pettett.github.io/>Home</a> / <a href=https://pettett.github.io/projects/>List of my Projects</a> / CS:IB Group Project : ModularSynth</nav><div class=container><h1 class=title>CS:IB Group Project : ModularSynth</h1><div class=metadata><code>
+	{"date" : 2023-03-14, "tags" : ["<a href=https://pettett.github.io/tags/cpp/>cpp</a>","<a href=https://pettett.github.io/tags/cs/>cs</a>",]}
+</code></div><article><p>Winner: <a href=https://www.cst.cam.ac.uk/news/students-find-success-design-project-awards>Most Impressive Professional Achievement</a>, Nominated: Most Impressive Technical Achievement<sup class=footnote-reference><a href=#0>1</a></sup>.</p><span id=continue-reading></span><h2 id=original-brief>Original Brief</h2><blockquote><p><em>Client: George Welch, IMC</em> <br><br> Sophisticated digital music composition tools like the Sonic Pi language rely on an internal architecture of samples, waveforms and filters. In the popular SuperCollider system, a new synthesiser is defined by software-wiring together these “UGens”. Your task is to create a SuperCollider client that looks like a retro-style modular synthesiser or guitar pedal board, where connecting literal wires between pictures of hardware modules on the screen will construct an exact digital equivalent within the SuperCollider server. A live audio input would give you a universal guitar pedal, sample mixing makes you a DJ/producer, or if bleeps and whooshes are your thing, you can impress your Grandpa by channelling Brian Eno in the glory days of Roxy Music.</blockquote><h2 id=overall-experience>Overall Experience</h2><p>My overall experience with the project was positive; all members of the team mostly agreed on all design decisions, used git with branches effectively to manage collaboration, and kept to most key timelines.<p>In terms of code, the largest issues with the (my region, backend of) project was the lack of unit tests on higher levels of the code - all tests where implementation tests, meaning testing higher level units in isolation was impossible and proved not useful to debug, although very useful to verify the entire project was working. The solution to this would have been to make a dummy library to take the place of lower level ones and substituting out objects for dummies, then testing the state of those instead of the root supercollider servers.<figure><img alt="MIDI Module" src=/projects/midi.png style=max-height:300px><figcaption>A MIDI module wired to many organ synths</figcaption></figure><h2 id=personal-contribution>Personal Contribution</h2><p>My first work was experimenting with the control of a <abbr title=SuperCollider>SC</abbr> server in python, which taught me a lot about its communication nuances and gave us early knowledge about its capabilities and limitations. This prototype was based around a simple command line interface, and with it I coded the first set of synthdefs (audio functions) in the SC language, and midi playback, although these were both to be heavily improved.<p>My next work was in the C++ source code<sup class=footnote-reference><a href=#c>2</a></sup>. I started by setting up a CMake build chain that would be used through the project, splitting the layers of the backend that were to exist into individual libraries, which proved very useful for collaborative coding, as we could work on certain layers of the project even if others were currently broken or undocumented.<p>The first lines of code written in C++ was a simple object oriented wrapper around the SC server, known as the SCOOP layer, allowing the upload of synthdefs, instantiation of synths, playing and pausing of synths, and assignment of constant parameters. With this done, the scale of implementing the rest of the OSC commands exposed by SC became daunting, so I switched to automatic code generation, resulting in almost 800 lines of automatically generated <em>and</em> autodoc’d C++ functions based on the documentation available on the website, which was a significant timesaver in the long run.<p>At this point, roughly week 5, the roadblock of backend/frontend communication had become an issue as our implementation goal of week three slipped further away, and I thought the method currently being looked at of a C-style API to interact with our already convoluted and very object oriented C++ project would likely not be finished in time for anyone to actually use it, so I introduced the <a href=https://en.wikipedia.org/wiki/C%2B%2B/CLI>C++/CLR</a> (language? compiler?) to replace this, as it was specifically designed for this task, and much easier to work with (once you get past Microsoft’s full lack of documentation).<p>C++/CLR compiles C++ code to the common language runtime, the same platform C# runs on, as well as exporting all required metadata to allow C# to consume the <code>.dll</code> file as a dotnet native library, giving very performant interop as the only meaningful marshalling required are to convert strings from C# 16 bit unicode to C style 8 bit ASKII strings. This module then links to the previously compiled libraries from the lower layers of the code, still compiled in native form, meaning after the interop stage we are running full performance C++ code.<p>After this, I quickly implemented audio/control rate changes for buses and synths for use in the layer above, required to allow some synths to write into the parameters of other synths, at which point the fundamentals of the library were complete. My next big goal was implementing MIDI, which turned into a large task, but I was pretty happy with the result. The main challenge was this being the first sound creating module that wasn’t represented on the server, but had to manually send commands to set the frequencies of notes being played over buses, which meant synths had to maintain a control thread to execute.<p>Testing the MIDI was a difficult task, as there were suddenly a huge amount more layers of things to go wrong, and a small collection of fixes made to support this includes: many bugs in the graph model automatic rate changing logic, fixing server model inconsistencies, and large changes to the C++/CLR marshalling layer to better support ports.<p>The biggest issue with MIDI compared to synthesisers are the limitation of synthesisers playing a single note at a time. My ideal solution to this would have been to allow the <code>Bus</code> class to represent multiple server side busses to carry a collection of frequencies at once, and similarly duplicate synths on the server side. Most of the work for this was done, but due to time constraints could not be fully implemented, meaning each midi channel could only output 2 notes, and required them to be outputted into 2 distinct synths, resulting in 32 ports on the midi module, which was not very intuitive. An existing issue with rate switching logic also meant the midi controller could not output to all synth types, notably only working when connected to the organ module.<hr><h2 id=contributions-of-other-members>Contributions of Other Members</h2><p>I am most familiar with the contributions of 1. █████ █████ and 4. █████ █████, as they worked in the same area of the project as me.<h3 id=1>1. █████ █████</h3><p>█████ worked mainly on the graph network for the supercollider model, ensuring cyclic connections and a single input to each “wire group” was maintained throughout the running of the program. This included making some of the higher level classes exposed to front-end, including <code>Section.cpp</code>, which had many utility functions for connecting ports and diagnosing the issues with connections should they occur so the front-end could tell the user what had gone wrong, useful as part of the goal of the project was to introduce new users to the concepts of modular synths.<p>They were also very involved to project management, organising meetings with the client and ensuring communication between the 3 members of the backend, and developed integration tests for the entire library.<h3 id=2>2. █████ █████</h3><p>█████ worked heavily on the front-end, developing an entity management system to be integrated with the 2D rendering framework Monogame, which was then used by them to develop a grid system to drag and drop modules around on and component rendering system to draw and track positions of knobs and dials and the like of synthesiser modules.<h3 id=3>3. █████ █████</h3><p>█████ worked on a huge variety of tasks, starting with attempting to design a c-style dll compatibility layer, which was ultimately replaced, to working on a large amount of UI design for components, developing the graphics for dangling wires and most other intractable UI components. Along with this, they used blender to develop high quality and easily readable graphics for different modules, excepting the midi and organ graphics which were made by me, and overall contributed heavily to the polished look and feel of the final product.<h3 id=4>4. █████ █████</h3><p>█████ worked on the higher level of Supercollider, using my SCOOP library to design <code>LogicalBus.cpp</code> which allowed the merging and separating of groups of synths reading and writing to the same parameters, allowing the node based representation above it to easily set synths to read and write to each other. They also helped me with a large amount of debugging and editing to the SCOOP layer.<h3 id=5>5. █████ █████</h3><p>█████ worked on the json representation of modules for the instantiation of their set of UI components and graphics. This worked with a two file system, one file defining what parameters a synthdef contained and their limits, and another file defining how these parameters would be represented with components on a module. This allowed for multiple modules referring to the same synthdef, useful for when different synthdefs could produce a large variety of sounds, for example the <code>sin-ar</code> synthdef which could be used for low frequency 0-20Hz control, or audible frequency 100-10000Hz to produce sounds, and separating these use cases into two modules was very useful.<hr><h2 id=source-code>Source Code</h2><p>The main loop of the MIDI Controller, run in a background thread:<pre class=language-cpp data-lang=cpp style=background-color:#272822;color:#f8f8f2;><code class=language-cpp data-lang=cpp><span style=font-style:italic;color:#66d9ef;>void </span><span>MidiSynth::</span><span style=color:#a6e22e;>ControlLoop</span><span>(std::string </span><span style=color:#f92672;>const& </span><span style=font-style:italic;color:#fd971f;>source</span><span>)
+</span><span>{ 
+</span><span>
+</span><span>	</span><span style=color:#75715e;>//read file
+</span><span>	std::ifstream infile{ source, std::ios_base::binary };
+</span><span>
+</span><span>	std::vector<</span><span style=font-style:italic;color:#66d9ef;>uint8_t</span><span>> bytes;
+</span><span>	bytes.assign(std::istreambuf_iterator<</span><span style=font-style:italic;color:#66d9ef;>char</span><span>>(infile), std::istreambuf_iterator<</span><span style=font-style:italic;color:#66d9ef;>char</span><span>>());
+</span><span>
+</span><span>	libremidi::reader r{</span><span style=color:#ae81ff;>true</span><span>};
+</span><span>	</span><span style=color:#75715e;>//Parse the file
+</span><span>	</span><span style=font-style:italic;color:#66d9ef;>auto</span><span> res </span><span style=color:#f92672;>=</span><span> r.parse(bytes);
+</span><span>
+</span><span>	</span><span style=color:#f92672;>if </span><span>(res </span><span style=color:#f92672;>==</span><span> libremidi::reader::parse_result::invalid) {
+</span><span>		</span><span style=color:#f92672;>throw </span><span>std::invalid_argument(</span><span style=color:#e6db74;>"MIDI from " </span><span style=color:#f92672;>+</span><span> source </span><span style=color:#f92672;>+ </span><span style=color:#e6db74;>" invalid!"</span><span>);
+</span><span>	}
+</span><span>
+</span><span>	</span><span style=color:#f92672;>if </span><span>(r.tracks.size() </span><span style=color:#f92672;>== </span><span style=color:#ae81ff;>0</span><span>) {
+</span><span>		</span><span style=color:#f92672;>throw </span><span>std::invalid_argument(</span><span style=color:#e6db74;>"MIDI from " </span><span style=color:#f92672;>+</span><span> source </span><span style=color:#f92672;>+ </span><span style=color:#e6db74;>" has no tracks!"</span><span>);
+</span><span>	}
+</span><span>
+</span><span>	</span><span style=font-style:italic;color:#66d9ef;>float</span><span> bps </span><span style=color:#f92672;>=</span><span> r.startingTempo </span><span style=color:#f92672;>/ </span><span style=color:#ae81ff;>60.0</span><span>;
+</span><span>
+</span><span>
+</span><span>	std::array<</span><span style=font-style:italic;color:#66d9ef;>int</span><span>, </span><span style=color:#ae81ff;>16</span><span>> track_clock{};
+</span><span>	std::array&LTstd::array<</span><span style=font-style:italic;color:#66d9ef;>int</span><span>, </span><span style=color:#ae81ff;>2</span><span>>, </span><span style=color:#ae81ff;>16</span><span>> playing{};
+</span><span>
+</span><span>	</span><span style=font-style:italic;color:#66d9ef;>int</span><span> tick </span><span style=color:#f92672;>= </span><span style=color:#ae81ff;>0</span><span>;
+</span><span>
+</span><span>	std::chrono::steady_clock </span><span style=color:#66d9ef;>clock</span><span>{};
+</span><span>
+</span><span>	</span><span style=font-style:italic;color:#66d9ef;>auto</span><span> last_clock </span><span style=color:#f92672;>=</span><span> clock.now();
+</span><span>
+</span><span>	</span><span style=color:#75715e;>//Loop it forever, checking state of source object
+</span><span>	</span><span style=color:#f92672;>while </span><span>(</span><span style=color:#ae81ff;>true</span><span>) {
+</span><span>
+</span><span>		</span><span style=font-style:italic;color:#66d9ef;>int</span><span> next </span><span style=color:#f92672;>= -</span><span style=color:#ae81ff;>1</span><span>;
+</span><span>		</span><span style=font-style:italic;color:#66d9ef;>int</span><span> next_tick </span><span style=color:#f92672;>= </span><span style=color:#ae81ff;>10000000</span><span>;
+</span><span>		libremidi::message msg;
+</span><span>
+</span><span>		</span><span style=color:#f92672;>for </span><span>(</span><span style=font-style:italic;color:#66d9ef;>size_t</span><span> i </span><span style=color:#f92672;>= </span><span style=color:#ae81ff;>0</span><span>; i </span><span style=color:#f92672;><</span><span> r.tracks.size(); i</span><span style=color:#f92672;>++</span><span>)
+</span><span>		{
+</span><span>			</span><span style=color:#f92672;>if </span><span>(r.tracks[i].size() </span><span style=color:#f92672;>></span><span> track_clock[i] </span><span style=color:#f92672;>&&</span><span> r.tracks[i][track_clock[i]].tick </span><span style=color:#f92672;><</span><span> next_tick) {
+</span><span>				next </span><span style=color:#f92672;>=</span><span> i;
+</span><span>				next_tick </span><span style=color:#f92672;>=</span><span> r.tracks[i][track_clock[i]].tick;
+</span><span>				msg </span><span style=color:#f92672;>=</span><span> r.tracks[i][track_clock[i]].m;
+</span><span>			}
+</span><span>		}
+</span><span>
+</span><span>		</span><span style=color:#f92672;>if </span><span>(next </span><span style=color:#f92672;>== -</span><span style=color:#ae81ff;>1</span><span>) {
+</span><span>			</span><span style=color:#75715e;>// loop!
+</span><span>			track_clock </span><span style=color:#f92672;>= </span><span>{};
+</span><span>			playing </span><span style=color:#f92672;>= </span><span>{};
+</span><span>			tick </span><span style=color:#f92672;>= </span><span style=color:#ae81ff;>0</span><span>; 
+</span><span>			bps </span><span style=color:#f92672;>=</span><span> r.startingTempo </span><span style=color:#f92672;>/ </span><span style=color:#ae81ff;>60.0</span><span>;
+</span><span>
+</span><span>			</span><span style=color:#f92672;>continue</span><span>;
+</span><span>		}
+</span><span>
+</span><span>		track_clock[next]</span><span style=color:#f92672;>++</span><span>;
+</span><span>		
+</span><span>		</span><span style=color:#75715e;>// Wait for the event to happen, minus the time that has elapsed since the last event
+</span><span>		</span><span style=font-style:italic;color:#66d9ef;>auto</span><span> process_time </span><span style=color:#f92672;>=</span><span> clock.now() </span><span style=color:#f92672;>-</span><span> last_clock;
+</span><span>
+</span><span>		std::this_thread::sleep_for(std::chrono::microseconds((</span><span style=font-style:italic;color:#66d9ef;>int</span><span>)(</span><span style=color:#ae81ff;>1000000 </span><span style=color:#f92672;>* </span><span>(next_tick </span><span style=color:#f92672;>-</span><span> tick)</span><span style=color:#f92672;>/</span><span> r.ticksPerBeat </span><span style=color:#f92672;>/</span><span> bps)) </span><span style=color:#f92672;>-</span><span> process_time);
+</span><span>		
+</span><span>		last_clock </span><span style=color:#f92672;>=</span><span> clock.now();
+</span><span>
+</span><span>		tick </span><span style=color:#f92672;>=</span><span> next_tick;
+</span><span>
+</span><span>		</span><span style=font-style:italic;color:#66d9ef;>int</span><span> note;
+</span><span>
+</span><span>		</span><span style=color:#f92672;>if </span><span>(msg.is_meta_event())
+</span><span>		{
+</span><span>			</span><span style=color:#f92672;>switch </span><span>(msg.get_meta_event_type())
+</span><span>			{
+</span><span>			</span><span style=color:#f92672;>case</span><span> libremidi::meta_event_type::TEMPO_CHANGE:
+</span><span>			{
+</span><span>				</span><span style=font-style:italic;color:#66d9ef;>int</span><span> len </span><span style=color:#f92672;>=</span><span> msg.bytes[</span><span style=color:#ae81ff;>2</span><span>];
+</span><span>
+</span><span>				</span><span style=font-style:italic;color:#66d9ef;>int</span><span> tempo </span><span style=color:#f92672;>= </span><span style=color:#ae81ff;>0</span><span>;
+</span><span> 
+</span><span>				</span><span style=color:#f92672;>for </span><span>(</span><span style=font-style:italic;color:#66d9ef;>size_t</span><span> i </span><span style=color:#f92672;>= </span><span style=color:#ae81ff;>0</span><span>; i </span><span style=color:#f92672;><</span><span> len; i</span><span style=color:#f92672;>++</span><span>)
+</span><span>				{ 
+</span><span>					tempo </span><span style=color:#f92672;><<= </span><span style=color:#ae81ff;>8</span><span>;
+</span><span>					tempo </span><span style=color:#f92672;>+=</span><span> msg.bytes[</span><span style=color:#ae81ff;>3 </span><span style=color:#f92672;>+</span><span> i];
+</span><span>				} 
+</span><span>
+</span><span>				bps </span><span style=color:#f92672;>= </span><span>(</span><span style=color:#ae81ff;>60000000.0 </span><span style=color:#f92672;>/</span><span> tempo) </span><span style=color:#f92672;>/ </span><span style=color:#ae81ff;>60</span><span>; 
+</span><span>
+</span><span>				</span><span style=color:#f92672;>break</span><span>;
+</span><span>			}
+</span><span>
+</span><span>			</span><span style=color:#f92672;>default</span><span>: 
+</span><span>				</span><span style=color:#f92672;>break</span><span>;
+</span><span>			}
+</span><span>		}
+</span><span>		</span><span style=color:#f92672;>else
+</span><span>		{
+</span><span>			</span><span style=color:#f92672;>switch </span><span>(msg.get_message_type())
+</span><span>			{
+</span><span>			</span><span style=color:#f92672;>case</span><span> libremidi::message_type::NOTE_ON:
+</span><span>				note </span><span style=color:#f92672;>= </span><span>(</span><span style=font-style:italic;color:#66d9ef;>int</span><span>)msg.bytes[</span><span style=color:#ae81ff;>1</span><span>];
+</span><span>
+</span><span>				</span><span style=color:#f92672;>if </span><span>(playing[next][</span><span style=color:#ae81ff;>0</span><span>] </span><span style=color:#f92672;>== </span><span style=color:#ae81ff;>0</span><span>) {
+</span><span>					playing[next][</span><span style=color:#ae81ff;>0</span><span>] </span><span style=color:#f92672;>=</span><span> note;
+</span><span>					std::get&LTBus>(controls[channels[next][</span><span style=color:#ae81ff;>0</span><span>]]).set(from_midi_note(note));
+</span><span>				}
+</span><span>				</span><span style=color:#f92672;>else if </span><span>(playing[next][</span><span style=color:#ae81ff;>1</span><span>] </span><span style=color:#f92672;>== </span><span style=color:#ae81ff;>0</span><span>) {
+</span><span>					playing[next][</span><span style=color:#ae81ff;>1</span><span>] </span><span style=color:#f92672;>=</span><span> note;
+</span><span>					std::get&LTBus>(controls[channels[next][</span><span style=color:#ae81ff;>1</span><span>]]).set(from_midi_note(note));
+</span><span>				}
+</span><span>				</span><span style=color:#f92672;>else </span><span>{
+</span><span>					</span><span style=color:#75715e;>//std::cout << "- Missed the note!";
+</span><span>				}
+</span><span>
+</span><span>				</span><span style=color:#f92672;>break</span><span>;
+</span><span>			</span><span style=color:#f92672;>case</span><span> libremidi::message_type::NOTE_OFF:
+</span><span>				
+</span><span>				note </span><span style=color:#f92672;>= </span><span>(</span><span style=font-style:italic;color:#66d9ef;>int</span><span>)msg.bytes[</span><span style=color:#ae81ff;>1</span><span>];
+</span><span>				</span><span style=color:#75715e;>//std::cout << "Note OFF: "
+</span><span>				</span><span style=color:#75715e;>//	<< "channel " << msg.get_channel() << ' '
+</span><span>				</span><span style=color:#75715e;>//	<< "note " << note << ' '
+</span><span>				</span><span style=color:#75715e;>//	<< "velocity " << (int)msg.bytes[2] << ' ';
+</span><span>
+</span><span>				</span><span style=color:#f92672;>if </span><span>(playing[next][</span><span style=color:#ae81ff;>0</span><span>] </span><span style=color:#f92672;>==</span><span> note) {
+</span><span>					playing[next][</span><span style=color:#ae81ff;>0</span><span>] </span><span style=color:#f92672;>= </span><span style=color:#ae81ff;>0</span><span>;
+</span><span>					std::get&LTBus>(controls[channels[next][</span><span style=color:#ae81ff;>0</span><span>]]).set(</span><span style=color:#ae81ff;>0</span><span>);
+</span><span>				}</span><span style=color:#f92672;>else if </span><span>(playing[next][</span><span style=color:#ae81ff;>1</span><span>] </span><span style=color:#f92672;>==</span><span> note) {
+</span><span>					playing[next][</span><span style=color:#ae81ff;>1</span><span>] </span><span style=color:#f92672;>= </span><span style=color:#ae81ff;>0</span><span>;
+</span><span>					std::get&LTBus>(controls[channels[next][</span><span style=color:#ae81ff;>1</span><span>]]).set(</span><span style=color:#ae81ff;>0</span><span>);
+</span><span>				}
+</span><span>
+</span><span>				</span><span style=color:#f92672;>break</span><span>;
+</span><span>			</span><span style=color:#f92672;>default</span><span>:
+</span><span>				</span><span style=color:#75715e;>//std::cout << "Unsupported.";
+</span><span>				</span><span style=color:#f92672;>break</span><span>;
+</span><span>			}
+</span><span>		}
+</span><span>	</span><span style=color:#75715e;>//	std::cout << '\n';
+</span><span>
+</span><span>	}
+</span><span>}
+</span><span>
+</span></code></pre><hr><p>Here is an example of the original C++/CLR template designed with the first working interop.<pre class=language-cpp data-lang=cpp style=background-color:#272822;color:#f8f8f2;><code class=language-cpp data-lang=cpp><span style=color:#75715e;>// compile with: /clr /LD
+</span><span>
+</span><span style=color:#f92672;>#include </span><span style=color:#e6db74;>&LTvcclr.h>
+</span><span style=color:#f92672;>#include </span><span style=color:#e6db74;>&LTSynth.hpp>
+</span><span style=color:#f92672;>#include </span><span style=color:#e6db74;>&LTmsclr\marshal_cppstd.h>
+</span><span>#using &LTSystem.dll>
+</span><span>
+</span><span style=color:#f92672;>using namespace</span><span> System;
+</span><span>
+</span><span style=color:#75715e;>//ATM this "Section" uses the lower level synth abstraction
+</span><span style=color:#75715e;>// Needs to be changed to the port model, this is a proof of concept
+</span><span>
+</span><span style=color:#f92672;>namespace </span><span>SynthAPI {
+</span><span>
+</span><span>	public ref </span><span style=font-style:italic;color:#66d9ef;>class </span><span>SCSection {
+</span><span>
+</span><span>	private</span><span style=color:#f92672;>:
+</span><span>
+</span><span>		array</span><span style=color:#f92672;><</span><span> String</span><span style=color:#f92672;>^ >^</span><span> params;
+</span><span>		Synth</span><span style=color:#f92672;>* </span><span>m_Impl;
+</span><span>	public</span><span style=color:#f92672;>:
+</span><span>
+</span><span>		</span><span style=color:#75715e;>// Allocate the native object on the C++ Heap via a constructor
+</span><span>
+</span><span>		SCSection(String</span><span style=color:#f92672;>^</span><span> synthdef) {
+</span><span>
+</span><span>			</span><span style=color:#f92672;>try </span><span>{
+</span><span>				</span><span style=color:#75715e;>//Generate the synth on the server.
+</span><span>				</span><span style=color:#75715e;>//Currently blocking, in future will use a bool valid
+</span><span>				m_Impl </span><span style=color:#f92672;>= </span><span>SuperColliderController::get().InstantiateSynth(msclr::interop::marshal_as&LTstd::string>(synthdef));
+</span><span>				</span><span style=font-style:italic;color:#66d9ef;>auto</span><span> size </span><span style=color:#f92672;>= </span><span>m_Impl->controls.size();
+</span><span>				params </span><span style=color:#f92672;>=</span><span> gcnew array</span><span style=color:#f92672;><</span><span> String</span><span style=color:#f92672;>^ ></span><span>(size);
+</span><span>				</span><span style=font-style:italic;color:#66d9ef;>int</span><span> i </span><span style=color:#f92672;>= </span><span style=color:#ae81ff;>0</span><span>;
+</span><span>				</span><span style=color:#75715e;>// Cache the params of the function locally, to save lots of re-generating of strings
+</span><span>				</span><span style=color:#f92672;>for </span><span>(</span><span style=font-style:italic;color:#66d9ef;>auto</span><span> it </span><span style=color:#f92672;>= </span><span>m_Impl->controls.begin(); it </span><span style=color:#f92672;>!= </span><span>m_Impl->controls.end(); </span><span style=color:#f92672;>++</span><span>it) {
+</span><span>
+</span><span>					params[i] </span><span style=color:#f92672;>=</span><span> gcnew String(it->first.c_str());
+</span><span>
+</span><span>					i</span><span style=color:#f92672;>++</span><span>;
+</span><span>				}
+</span><span>			}
+</span><span>			</span><span style=color:#f92672;>catch </span><span>(std::exception</span><span style=color:#f92672;>&</span><span> ex) {
+</span><span>				</span><span style=color:#75715e;>//standard conversion from native to managed exception
+</span><span>				</span><span style=color:#f92672;>throw</span><span> gcnew System::Exception(gcnew System::String(ex.what()));
+</span><span>			}
+</span><span>		}
+</span><span>	
+</span><span>		</span><span style=color:#75715e;>// Deallocate the native object on a destructor
+</span><span>		</span><span style=color:#f92672;>~</span><span>SCSection() {
+</span><span>			</span><span style=color:#f92672;>delete </span><span>m_Impl;
+</span><span>		}
+</span><span>
+</span><span>	protected</span><span style=color:#f92672;>:
+</span><span>
+</span><span>		</span><span style=color:#75715e;>// Deallocate the native object on the finalizer just in case no destructor is called
+</span><span>	
+</span><span>		</span><span style=color:#f92672;>!</span><span>SCSection() {
+</span><span>			</span><span style=color:#f92672;>delete </span><span>m_Impl;
+</span><span>		}
+</span><span>
+</span><span>	public</span><span style=color:#f92672;>:
+</span><span>
+</span><span>		</span><span style=color:#75715e;>//Currently a null check, in future will also show if the node exists on the server yet
+</span><span>		</span><span style=font-style:italic;color:#66d9ef;>bool </span><span>Valid() {
+</span><span>			</span><span style=color:#f92672;>return </span><span>m_Impl </span><span style=color:#f92672;>!= </span><span style=color:#ae81ff;>nullptr</span><span>;
+</span><span>		}
+</span><span>
+</span><span>		</span><span style=color:#75715e;>//This all works with the old model, but without any wire attachments its pretty much useless
+</span><span>
+</span><span>		</span><span style=font-style:italic;color:#66d9ef;>void </span><span>Set(String</span><span style=color:#f92672;>^</span><span> param, </span><span style=font-style:italic;color:#66d9ef;>float</span><span> value) {
+</span><span>			</span><span style=font-style:italic;color:#66d9ef;>auto</span><span> s </span><span style=color:#f92672;>= </span><span>msclr::interop::marshal_as&LTstd::string>(param);
+</span><span>			m_Impl->set(s, value);
+</span><span>		}
+</span><span>
+</span><span>		</span><span style=font-style:italic;color:#66d9ef;>float </span><span>Get(String</span><span style=color:#f92672;>^</span><span> param) {
+</span><span>			</span><span style=font-style:italic;color:#66d9ef;>auto</span><span> s </span><span style=color:#f92672;>= </span><span>msclr::interop::marshal_as&LTstd::string>(param);
+</span><span>			</span><span style=color:#f92672;>return </span><span>std::get<</span><span style=font-style:italic;color:#66d9ef;>float</span><span>>(m_Impl->get(s));
+</span><span>		}
+</span><span>
+</span><span>		property array</span><span style=color:#f92672;><</span><span>String</span><span style=color:#f92672;>^>^ </span><span>controls {
+</span><span>			array</span><span style=color:#f92672;><</span><span>String</span><span style=color:#f92672;>^>^ </span><span>get(){ </span><span style=color:#f92672;>return</span><span> params; }
+</span><span>		}
+</span><span>
+</span><span>		property </span><span style=font-style:italic;color:#66d9ef;>int </span><span>index {
+</span><span>			</span><span style=font-style:italic;color:#66d9ef;>int </span><span>get() { </span><span style=color:#f92672;>return </span><span>m_Impl->index; }
+</span><span>		}
+</span><span>
+</span><span>		</span><span style=font-style:italic;color:#66d9ef;>void </span><span>Run(</span><span style=font-style:italic;color:#66d9ef;>bool</span><span> run) {
+</span><span>			m_Impl->Run(run);
+</span><span>		}
+</span><span>	};
+</span><span>}
+</span></code></pre><hr><div class=footnote-definition id=0><sup class=footnote-definition-label>1</sup><p>based on the <a href="https://www.youtube.com/watch?v=iWxWJKYrUTY&list=PLstyePOvf2d2ZvC92BQkpR6WiaiROytev&index=13">video</a> we made for it.</div><div class=footnote-definition id=c><sup class=footnote-definition-label>2</sup><p>Why did we code the backend in C++, when it’s purpose was to manage a web API and the front was written in C#? Because teamwork requires compromise, and the other backend members wanted C++ experience.</div></article></div><footer class=footer><h2><a href=https://github.com/pettett>Github</a> | <a href=https://www.linkedin.com/in/maxwell-pettett/>LinkedIn</a> | maxwell pettett at gmail dot com | <a href=https://mastodon.gamedev.place/@pettett rel=me>Mastodon</a></h2></footer>
